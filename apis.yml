@@ -1,0 +1,19 @@
+aid: csg
+url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml
+apis:
+- aid: csg:csg-api
+  name: CSG Singleview Billing API
+  tags:
+  - Telecom
+  - Billing
+  - BSS
+  - Revenue Management
+  - SOAP
+  image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+  humanURL: https://www.csgi.com/
+  baseURL: https://api.csgi.example.com
+  properties:
+  - url: https://www.csgi.com/
+    type: Documentation
+  description: >-
+    CSG (formerly CSG Systems / Comverse) provides billing and revenue management platforms for telecom operators. The Singleview platform APIs enable subscriber billing, usage rating, invoice generation, and payment processing across converged services.
