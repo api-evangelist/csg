@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.forte.net/v3/schemas/transaction",
+  "title": "CSG Forte Payment Transaction",
+  "description": "Schema representing a payment transaction in the CSG Forte payment processing platform.",
+  "type": "object",
+  "required": ["transaction_id", "action", "authorization_amount"],
+  "properties": {
+    "transaction_id": {
+      "type": "string",
+      "description": "Unique transaction identifier in trn_XXXXX format",
+      "pattern": "^trn_[A-Za-z0-9]+$"
+    },
+    "location_id": {
+      "type": "string",
+      "description": "Location identifier where the transaction was processed",
+      "pattern": "^loc_[A-Za-z0-9]+$"
+    },
+    "action": {
+      "type": "string",
+      "description": "Transaction action type",
+      "enum": ["sale", "authorize", "capture", "void", "credit", "force", "verify"]
+    },
+    "authorization_amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Transaction amount in USD",
+      "minimum": 0.01
+    },
+    "authorization_code": {
+      "type": "string",
+      "description": "Authorization code returned by the card issuer"
+    },
+    "entered_by": {
+      "type": "string",
+      "description": "User or system that entered the transaction"
+    },
+    "order_number": {
+      "type": "string",
+      "description": "Merchant-assigned order reference number"
+    },
+    "received_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when transaction was received"
+    },
+    "transaction_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the transaction was processed"
+    },
+    "response": {
+      "$ref": "#/$defs/TransactionResponse"
+    },
+    "billing_address": {
+      "$ref": "#/$defs/Address"
+    },
+    "card": {
+      "$ref": "#/$defs/CardInfo"
+    },
+    "echeck": {
+      "$ref": "#/$defs/EcheckInfo"
+    },
+    "customer_token": {
+      "type": "string",
+      "description": "Token referencing a stored customer record"
+    },
+    "paymethod_token": {
+      "type": "string",
+      "description": "Token referencing a stored payment method"
+    },
+    "schedule_id": {
+      "type": "string",
+      "description": "ID of the recurring schedule this transaction belongs to"
+    },
+    "xdata": {
+      "type": "object",
+      "description": "Custom extended transaction data fields",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "TransactionResponse": {
+      "type": "object",
+      "properties": {
+        "environment": {
+          "type": "string",
+          "enum": ["live", "sandbox"]
+        },
+        "response_type": {
+          "type": "string",
+          "description": "A=Approved, D=Declined, E=Error, F=Force, U=Undetermined",
+          "enum": ["A", "D", "E", "F", "U"]
+        },
+        "response_code": {
+          "type": "string",
+          "description": "Processor response code"
+        },
+        "response_desc": {
+          "type": "string",
+          "description": "Human-readable response description"
+        },
+        "authorization_code": {
+          "type": "string"
+        },
+        "avs_result": {
+          "type": "string",
+          "description": "Address Verification System result code"
+        },
+        "cvv_result": {
+          "type": "string",
+          "description": "Card Verification Value check result"
+        }
+      }
+    },
+    "CardInfo": {
+      "type": "object",
+      "properties": {
+        "card_type": {
+          "type": "string",
+          "enum": ["visa", "mstr", "disc", "amex", "jcb", "dine", "enrt"]
+        },
+        "name_on_card": {
+          "type": "string"
+        },
+        "masked_account_number": {
+          "type": "string",
+          "description": "Masked PAN, e.g., XXXX-XXXX-XXXX-1234",
+          "pattern": "^X{4}-X{4}-X{4}-[0-9]{4}$"
+        },
+        "expire_month": {
+          "type": "string",
+          "pattern": "^(0[1-9]|1[0-2])$"
+        },
+        "expire_year": {
+          "type": "string",
+          "pattern": "^[0-9]{4}$"
+        }
+      }
+    },
+    "EcheckInfo": {
+      "type": "object",
+      "properties": {
+        "account_type": {
+          "type": "string",
+          "enum": ["checking", "savings"]
+        },
+        "masked_account_number": {
+          "type": "string"
+        },
+        "routing_number": {
+          "type": "string",
+          "pattern": "^[0-9]{9}$",
+          "description": "9-digit ABA routing number"
+        },
+        "sec_code": {
+          "type": "string",
+          "description": "NACHA Standard Entry Class code",
+          "enum": ["PPD", "CCD", "WEB", "TEL", "ARC", "BOC", "POP", "RCK"]
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "first_name": { "type": "string" },
+        "last_name": { "type": "string" },
+        "company_name": { "type": "string" },
+        "physical_address": { "type": "string" },
+        "locality": { "type": "string", "description": "City" },
+        "region": { "type": "string", "description": "State/province" },
+        "postal_code": { "type": "string" },
+        "country_code": { "type": "string", "default": "US", "pattern": "^[A-Z]{2}$" }
+      }
+    }
+  }
+}

@@ -30,6 +30,8 @@ apis:
     type: Support
   - url: https://training.forte.net/
     type: Training
+  - url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/openapi/csg-forte-rest-openapi.yml
+    type: OpenAPI
   description: >-
     CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers.
 - aid: csg:csg-forte-js
@@ -83,6 +85,12 @@ apis:
 common:
 - url: https://www.csgi.com/
   type: Website
+- url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/openapi/csg-forte-rest-openapi.yml
+  type: OpenAPI
+- url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/json-schema/csg-forte-transaction-schema.json
+  type: JSONSchema
+- url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/json-ld/csg-context.jsonld
+  type: JSONLDContext
 - url: https://www.forte.net/developers/
   type: Portal
 - url: https://developers.forte.net/

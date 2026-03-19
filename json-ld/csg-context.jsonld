@@ -1,0 +1,88 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "forte": "https://api.forte.net/v3/schemas/",
+    "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Transaction": {
+      "@id": "forte:Transaction",
+      "@type": "schema:PaymentChargeSpecification"
+    },
+    "Customer": {
+      "@id": "forte:Customer",
+      "@type": "schema:Person"
+    },
+    "PaymentMethod": {
+      "@id": "forte:PaymentMethod",
+      "@type": "schema:PaymentMethod"
+    },
+    "Settlement": {
+      "@id": "forte:Settlement"
+    },
+
+    "transaction_id": "@id",
+    "action": {
+      "@id": "forte:transactionAction"
+    },
+    "authorization_amount": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "authorization_code": {
+      "@id": "forte:authorizationCode"
+    },
+    "order_number": {
+      "@id": "schema:orderNumber"
+    },
+    "received_date": {
+      "@id": "schema:dateReceived",
+      "@type": "xsd:dateTime"
+    },
+    "transaction_date": {
+      "@id": "schema:dateIssued",
+      "@type": "xsd:date"
+    },
+    "billing_address": {
+      "@id": "schema:billingAddress",
+      "@type": "schema:PostalAddress"
+    },
+    "first_name": "schema:givenName",
+    "last_name": "schema:familyName",
+    "company_name": "schema:legalName",
+    "physical_address": "schema:streetAddress",
+    "locality": "schema:addressLocality",
+    "region": "schema:addressRegion",
+    "postal_code": "schema:postalCode",
+    "country_code": "schema:addressCountry",
+    "email": "schema:email",
+    "phone": "schema:telephone",
+    "card_type": {
+      "@id": "forte:cardBrand"
+    },
+    "name_on_card": {
+      "@id": "forte:cardholderName"
+    },
+    "account_type": {
+      "@id": "forte:bankAccountType"
+    },
+    "routing_number": {
+      "@id": "forte:routingNumber"
+    },
+    "customer_token": {
+      "@id": "forte:customerReference"
+    },
+    "paymethod_token": {
+      "@id": "forte:paymentMethodReference"
+    },
+    "created_date": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:date"
+    },
+    "settle_date": {
+      "@id": "schema:dateIssued",
+      "@type": "xsd:date"
+    }
+  }
+}
