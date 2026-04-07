@@ -1,18 +1,16 @@
 aid: csg
-url: 
-  https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml
 apis:
   - aid: csg:csg-forte-rest-api
     name: CSG Forte REST API
     tags:
-      - Payments
-      - Billing
-      - REST
-      - PCI
-      - Credit Card
       - ACH
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+      - Billing
+      - Credit Card
+      - Payments
+      - PCI
+      - REST
+    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
     humanURL: https://developers.forte.net/
     baseURL: https://api.forte.net
     properties:
@@ -32,8 +30,7 @@ apis:
         type: Support
       - url: https://training.forte.net/
         type: Training
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/openapi/csg-forte-rest-openapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/openapi/csg-forte-rest-openapi.yml
         type: OpenAPI
     description: >-
       CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant
@@ -44,12 +41,11 @@ apis:
   - aid: csg:csg-forte-js
     name: CSG Forte.js
     tags:
-      - Payments
       - JavaScript
+      - Payments
       - SDK
       - Web
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
     humanURL: https://developers.forte.net/forte-js/
     baseURL: https://api.forte.net
     properties:
@@ -62,12 +58,11 @@ apis:
   - aid: csg:csg-forte-react-native-sdk
     name: CSG Forte React Native SDK
     tags:
-      - Payments
       - Mobile
+      - Payments
       - React Native
       - SDK
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
     humanURL: https://developers.forte.net/forte-react-native/
     baseURL: https://api.forte.net
     properties:
@@ -81,13 +76,12 @@ apis:
   - aid: csg:csg-singleview-api
     name: CSG Singleview Billing API
     tags:
-      - Telecom
       - Billing
       - BSS
       - Revenue Management
       - SOAP
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+      - Telecom
+    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
     humanURL: https://www.csgi.com/
     baseURL: https://api.csgi.com
     properties:
@@ -101,14 +95,11 @@ apis:
 common:
   - url: https://www.csgi.com/
     type: Website
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/openapi/csg-forte-rest-openapi.yml
+  - url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/openapi/csg-forte-rest-openapi.yml
     type: OpenAPI
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/json-schema/csg-forte-transaction-schema.json
+  - url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/json-schema/csg-forte-transaction-schema.json
     type: JSONSchema
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/json-ld/csg-context.jsonld
+  - url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/json-ld/csg-context.jsonld
     type: JSONLDContext
   - url: https://www.forte.net/developers/
     type: Portal

@@ -22,18 +22,14 @@ servers:
 security:
   - basicAuth: []
 tags:
-  - name: Transactions
-    description: Payment transaction processing (credit card, echeck, scheduled)
   - name: Customers
     description: Customer record management
   - name: Payment Methods
     description: Payment method tokenization and management
   - name: Settlements
     description: Settlement query and reconciliation
-  - name: Funding
-    description: Funding entries and disbursements
-  - name: Schedules
-    description: Recurring payment schedule management
+  - name: Transactions
+    description: Payment transaction processing (credit card, echeck, scheduled)
 paths:
   /organizations/{organizationId}/locations/{locationId}/transactions:
     get:
