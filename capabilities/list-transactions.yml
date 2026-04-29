@@ -1,0 +1,24 @@
+name: list-transactions
+description: >-
+  List payment transactions for a CSG Forte organization and location, with
+  optional filtering by date range, status, and payment method type.
+api: csg-forte-rest-api
+operationId: listTransactions
+method: GET
+path: /organizations/{organizationId}/locations/{locationId}/transactions
+inputs:
+  - name: organizationId
+    in: path
+    required: true
+  - name: locationId
+    in: path
+    required: true
+  - name: filter
+    in: query
+    required: false
+    description: Optional filter expression on date, status, or payment type.
+outputs:
+  - name: transactions
+    description: Paginated list of transactions for the location.
+sideEffects: read-only
+authentication: basic

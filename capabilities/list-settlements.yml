@@ -1,0 +1,24 @@
+name: list-settlements
+description: >-
+  Query settlement records for a CSG Forte organization and location to support
+  reconciliation and reporting workflows.
+api: csg-forte-rest-api
+operationId: listSettlements
+method: GET
+path: /organizations/{organizationId}/locations/{locationId}/settlements
+inputs:
+  - name: organizationId
+    in: path
+    required: true
+  - name: locationId
+    in: path
+    required: true
+  - name: filter
+    in: query
+    required: false
+    description: Optional filter expression on settlement date and status.
+outputs:
+  - name: settlements
+    description: Paginated list of settlements.
+sideEffects: read-only
+authentication: basic

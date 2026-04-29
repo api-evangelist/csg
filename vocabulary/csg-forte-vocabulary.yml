@@ -1,0 +1,26 @@
+name: CSG Forte Vocabulary
+description: >-
+  Controlled terms used across the CSG Forte REST API for payment processing
+  including organizations, locations, customers, payment methods, transactions,
+  and settlements.
+terms:
+  - term: Organization
+    definition: Top-level merchant entity in CSG Forte (org_XXXXX). Owns one or more locations.
+  - term: Location
+    definition: A merchant outlet within an organization that processes transactions and settles funds.
+  - term: Customer
+    definition: A consumer or business record stored under a location for repeat-use billing.
+  - term: PaymentMethod
+    definition: Tokenized credit card or echeck account stored against a customer.
+  - term: Transaction
+    definition: A single payment authorization, sale, refund, or scheduled charge.
+  - term: ScheduledTransaction
+    definition: A future-dated or recurring transaction queued for execution.
+  - term: Settlement
+    definition: A batched record indicating funded transactions deposited to the merchant.
+  - term: Echeck
+    definition: An ACH-routed bank account debit/credit using routing and account numbers.
+  - term: Token
+    definition: An opaque identifier representing a stored payment method to reduce PCI scope.
+  - term: BasicAuth
+    definition: HTTP Basic authentication using organization ID, location ID, and API key.

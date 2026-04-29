@@ -1,0 +1,60 @@
+extends: [[spectral:oas, all]]
+rules:
+  csg-forte-server-https:
+    description: CSG Forte servers must use HTTPS.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+  csg-forte-versioned-path:
+    description: CSG Forte server URLs must include /v{n} version segment.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: '/v[0-9]+'
+  csg-forte-org-location-path:
+    description: Resource paths must be scoped under /organizations/{organizationId}/locations/{locationId}.
+    given: $.paths
+    severity: warn
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^/organizations/\\{organizationId\\}/locations/\\{locationId\\}":
+              type: object
+          additionalProperties: false
+  csg-forte-org-id-pattern:
+    description: organizationId path parameter must match org_ prefix pattern.
+    given: $.paths[*][get,post,put,delete].parameters[?(@.name=='organizationId')]
+    severity: warn
+    then:
+      field: schema.pattern
+      function: truthy
+  csg-forte-pci-required:
+    description: Payment-method endpoints must declare an authentication requirement.
+    given: $.paths[?(@property.match(/paymentmethods/))][post,put]
+    severity: error
+    then:
+      field: security
+      function: truthy
+  csg-forte-tag-required:
+    description: Operations must declare a tag.
+    given: $.paths[*][get,post,put,delete]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+  csg-forte-operation-id-camel:
+    description: Operation IDs should be camelCase.
+    given: $.paths[*][get,post,put,delete].operationId
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
