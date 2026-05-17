@@ -1,6 +1,6 @@
 aid: csg
 url: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml
-x-type: company
+kind: company
 name: CSG Systems
 description: >-
   CSG is a global provider of customer engagement, revenue management, and
@@ -53,7 +53,7 @@ apis:
       - url: https://releases.forte.net/
         type: ChangeLog
       - url: https://status.forte.net/
-        type: Status
+        type: StatusPage
       - url: https://support.forte.net/
         type: Support
       - url: https://training.forte.net/
@@ -168,7 +168,7 @@ common:
   - url: https://support.forte.net/
     type: Support
   - url: https://status.forte.net/
-    type: Status
+    type: StatusPage
   - url: https://releases.forte.net/
     type: ChangeLog
   - url: https://www.forte.net/test-account-setup/
