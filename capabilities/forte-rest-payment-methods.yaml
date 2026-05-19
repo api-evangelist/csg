@@ -1,0 +1,138 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CSG Forte REST API — Payment Methods
+  description: 'CSG Forte REST API — Payment Methods. 2 operations. Lead operation: List payment methods for a location. Self-contained
+    Naftiko capability covering one Csg business surface.'
+  tags:
+  - Csg
+  - Payment Methods
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CSG_API_KEY: CSG_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: forte-rest-payment-methods
+    baseUri: https://api.forte.net/v3
+    description: CSG Forte REST API — Payment Methods business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-locations-locationId-paymentmethods
+      path: /organizations/{organizationId}/locations/{locationId}/paymentmethods
+      operations:
+      - name: listpaymentmethods
+        method: GET
+        description: List payment methods for a location
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: locationId
+          in: path
+          type: string
+          required: true
+        - name: customer_token
+          in: query
+          type: string
+      - name: createpaymentmethod
+        method: POST
+        description: Create a payment method token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: locationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.CSG_USER}}'
+      password: '{{env.CSG_PASS}}'
+  exposes:
+  - type: rest
+    namespace: forte-rest-payment-methods-rest
+    port: 8080
+    description: REST adapter for CSG Forte REST API — Payment Methods. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/locations/{locationid}/paymentmethods
+      name: organizations-organizationid-locations-locationid-paymentmethods
+      description: REST surface for organizations-organizationId-locations-locationId-paymentmethods.
+      operations:
+      - method: GET
+        name: listpaymentmethods
+        description: List payment methods for a location
+        call: forte-rest-payment-methods.listpaymentmethods
+        with:
+          organizationId: rest.organizationId
+          locationId: rest.locationId
+          customer_token: rest.customer_token
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createpaymentmethod
+        description: Create a payment method token
+        call: forte-rest-payment-methods.createpaymentmethod
+        with:
+          organizationId: rest.organizationId
+          locationId: rest.locationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: forte-rest-payment-methods-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CSG Forte REST API — Payment Methods. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-payment-methods-location
+      description: List payment methods for a location
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: forte-rest-payment-methods.listpaymentmethods
+      with:
+        organizationId: tools.organizationId
+        locationId: tools.locationId
+        customer_token: tools.customer_token
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-payment-method-token
+      description: Create a payment method token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: forte-rest-payment-methods.createpaymentmethod
+      with:
+        organizationId: tools.organizationId
+        locationId: tools.locationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
