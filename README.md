@@ -1,69 +1,142 @@
 # CSG Systems (csg)
 
-CSG is a global provider of customer engagement, revenue management, and payments solutions enabling communications, media, and entertainment companies to monetize and digitally enable customer experiences. CSG's developer surface includes the CSG Forte payments REST API, the Forte.js client-side tokenization library, the Forte React Native SDK, and the Singleview convergent billing platform.
+CSG is a global provider of customer engagement, revenue management, and payments solutions enabling communications, media, and entertainment companies to monetize and digitally enable customer experiences. CSG's developer surface includes the CSG Forte payments REST API, Forte.js client-side tokenization library, the Forte React Native SDK, and the Singleview convergent billing platform.
 
-**APIs.yml URL:** https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+- **Access:** 3rd-Party
 
 ## Tags
 
-Billing, Customer Engagement, Payments, Revenue Management, Telecom
+- Billing
+- Customer Engagement
+- Payments
+- Revenue Management
+- Telecom
+
+## Timestamps
+
+- **Created:** 2026-03-18
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### CSG Forte REST API
 
-PCI-compliant REST API for credit card, echeck, and scheduled payments. Supports customer and payment-method management plus settlement queries.
+CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses HTTP Basic with organization ID, location ID, and API key.
 
-- Base URL: https://api.forte.net/v3
-- Documentation: https://developers.forte.net/introduction-rest-api/
-- Reference: https://restdocs.forte.net/
-- OpenAPI: [openapi/csg-forte-rest-openapi.yml](openapi/csg-forte-rest-openapi.yml)
+- **Human URL:** [https://developers.forte.net/](https://developers.forte.net/)
+- **Base URL:** `https://api.forte.net/v3`
+
+#### Tags
+
+- ACH
+- Billing
+- Credit Card
+- Payments
+- PCI
+- REST
+
+#### Properties
+
+- [Documentation](https://developers.forte.net/introduction-rest-api/)
+- [Reference](https://restdocs.forte.net/)
+- [Getting Started](https://developers.forte.net/getting-started/)
+- [Sandbox](https://www.forte.net/test-account-setup/)
+- [Changelog](https://releases.forte.net/)
+- [Status Page](https://status.forte.net/)
+- [Support](https://support.forte.net/)
+- [Training](https://training.forte.net/)
+- [OpenAPI](openapi/csg-forte-rest-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/csg-forte-transaction-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [J S O N L D Context](json-ld/csg-context.jsonld)
 
 ### CSG Forte.js
 
-JavaScript library for browser-based card tokenization, reducing PCI scope on merchant servers.
+Forte.js is a JavaScript library for secure browser-based payment tokenization. It enables web applications to collect and tokenize payment card data client-side before submitting to Forte's payment API, reducing PCI scope.
 
-- Documentation: https://developers.forte.net/forte-js/
+- **Human URL:** [https://developers.forte.net/forte-js/](https://developers.forte.net/forte-js/)
+- **Base URL:** `https://api.forte.net`
+
+#### Tags
+
+- JavaScript
+- Payments
+- SDK
+- Web
+
+#### Properties
+
+- [Documentation](https://developers.forte.net/forte-js/)
+- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### CSG Forte React Native SDK
 
-Mobile SDK for integrating Forte payments into React Native iOS and Android apps.
+The Forte React Native SDK enables mobile application developers to integrate payment processing capabilities into iOS and Android apps built with React Native.
 
-- Documentation: https://developers.forte.net/forte-react-native/
+- **Human URL:** [https://developers.forte.net/forte-react-native/](https://developers.forte.net/forte-react-native/)
+- **Base URL:** `https://api.forte.net`
+
+#### Tags
+
+- Mobile
+- Payments
+- React Native
+- SDK
+
+#### Properties
+
+- [Documentation](https://developers.forte.net/forte-react-native/)
+- [S D Ks](https://developers.forte.net/forte-react-native/)
+- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### CSG Singleview Billing API
 
-Convergent billing and revenue management platform for communication service providers covering subscriber billing, usage rating, invoicing, and payments across 5G and IoT.
+CSG Singleview is a comprehensive convergent billing and revenue management platform designed for communication service providers. APIs enable subscriber billing, usage rating, invoice generation, and payment processing across converged 5G and IoT services.
 
-- Documentation: https://www.csgi.com/
+- **Human URL:** [https://www.csgi.com/](https://www.csgi.com/)
+- **Base URL:** `https://api.csgi.com`
 
-## Features
+#### Tags
 
-- PCI-scoped payment processing (credit card, echeck, scheduled)
-- Customer and tokenized payment-method management
-- Settlement and reconciliation queries
-- Browser-side tokenization with Forte.js
-- React Native mobile SDK
-- Convergent telecom billing via CSG Singleview
-- Sandbox environment for development
+- Billing
+- BSS
+- Revenue Management
+- SOAP
+- Telecom
 
-## Use Cases
+#### Properties
 
-- Merchant credit card and ACH payment acceptance
-- Recurring/subscription billing
-- Mobile checkout with tokenization
-- Telecom subscriber billing across 5G and IoT
-- Marketplace payouts and reconciliation
+- [Documentation](https://www.csgi.com/)
+- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-## Artifacts
+## Common Properties
 
-- OpenAPI: [openapi/csg-forte-rest-openapi.yml](openapi/csg-forte-rest-openapi.yml)
-- JSON Schema: [json-schema/csg-forte-transaction-schema.json](json-schema/csg-forte-transaction-schema.json)
-- JSON-LD Context: [json-ld/csg-context.jsonld](json-ld/csg-context.jsonld)
-- Vocabulary: [vocabulary/csg-forte-vocabulary.yml](vocabulary/csg-forte-vocabulary.yml)
-- Spectral Rules: [rules/csg-forte-rules.yml](rules/csg-forte-rules.yml)
-- Naftiko Capabilities: [capabilities/](capabilities/)
+- [GitHub Organization](https://github.com/csg-i)
+- [LinkedIn](https://www.linkedin.com/company/csg-)
+- [Website](https://www.csgi.com/)
+- [OpenAPI](openapi/csg-forte-rest-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [JSON Schema](json-schema/csg-forte-transaction-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [J S O N L D Context](json-ld/csg-context.jsonld)
+- [Spectral Rules](rules/csg-forte-rules.yml)
+- [Vocabulary](vocabulary/csg-forte-vocabulary.yml)
+- [Portal](https://www.forte.net/developers/)
+- [Documentation](https://developers.forte.net/)
+- [Reference](https://restdocs.forte.net/)
+- [Support](https://support.forte.net/)
+- [Status Page](https://status.forte.net/)
+- [Changelog](https://releases.forte.net/)
+- [Getting Started](https://www.forte.net/test-account-setup/)
 
 ## Maintainers
 
-- Kin Lane (kin@apievangelist.com)
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
