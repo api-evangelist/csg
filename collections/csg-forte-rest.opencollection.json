@@ -1,0 +1,446 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CSG Forte REST API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List transactions for a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/transactions",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Organization identifier (org_XXXXX format)"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "Location identifier (loc_XXXXX format)"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter transactions on or after this date (YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter transactions on or before this date (YYYY-MM-DD)"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transaction action"
+              },
+              {
+                "name": "response_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by response code (A for approved, D for declined, etc.)"
+              },
+              {
+                "name": "page_index",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of transactions for the specified organization and location. Supports filtering by date range, status, and payment method type."
+        },
+        {
+          "info": {
+            "name": "Create a payment transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/transactions",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new payment transaction. Supports credit card sales, authorizations, captures, voids, credits, and ACH/echeck transactions. Also supports scheduled/recurring transactions."
+        },
+        {
+          "info": {
+            "name": "Get transaction details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/transactions/:transactionId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific transaction."
+        },
+        {
+          "info": {
+            "name": "Update a transaction (void or capture)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/transactions/:transactionId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing transaction. Used to void, capture, or credit a prior transaction."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/customers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "customer_token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_index",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of customer records for the specified location."
+        },
+        {
+          "info": {
+            "name": "Create a customer record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/customers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new customer record for storing payment method tokens and billing information."
+        },
+        {
+          "info": {
+            "name": "Get customer details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/customers/:customerId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific customer record including stored payment methods."
+        },
+        {
+          "info": {
+            "name": "Update a customer record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/customers/:customerId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing customer record."
+        },
+        {
+          "info": {
+            "name": "Delete a customer record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/customers/:customerId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently removes a customer record and all associated payment methods."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payment methods for a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/paymentmethods",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customer_token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all stored payment method tokens for the location, optionally filtered by customer."
+        },
+        {
+          "info": {
+            "name": "Create a payment method token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/paymentmethods",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tokenizes a payment method (credit card or bank account) for future use."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Settlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List settlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/settlements",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_settle_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_settle_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns settlement records for reconciliation, including batch details and totals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
