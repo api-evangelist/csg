@@ -139,6 +139,12 @@ useCases:
   - name: Marketplace Payouts
     description: Platforms reconcile and settle funds across many merchant locations.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/csg-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/csg-domain-security.yml
+  - type: Authentication
+    url: authentication/csg-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/csg-i
   - type: LinkedIn
@@ -169,6 +175,8 @@ common:
     type: ChangeLog
   - url: https://www.forte.net/test-account-setup/
     type: GettingStarted
+  - url: https://developers.forte.net/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

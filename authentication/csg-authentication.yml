@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/csg-forte-rest-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication using API access ID as username and API secure key
+    as password. Include organization ID and location ID in the X-Forte-Auth-Organization-Id
+    and X-Forte-Auth-Location-Id request headers.
+  sources:
+  - openapi/csg-forte-rest-openapi.yml
