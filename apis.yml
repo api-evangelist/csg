@@ -139,6 +139,8 @@ useCases:
   - name: Marketplace Payouts
     description: Platforms reconcile and settle funds across many merchant locations.
 common:
+  - type: AgenticAccess
+    url: agentic-access/csg-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/csg-vulnerability-disclosure.yml
   - type: DomainSecurity
