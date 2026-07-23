@@ -1,0 +1,93 @@
+openapi: 3.1.0
+info:
+  title: CSG Forte REST Customers Settlements API
+  description: CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.
+  version: 3.0.0
+  contact:
+    name: Forte Support
+    url: https://support.forte.net/
+  license:
+    name: Forte Terms of Service
+    url: https://www.forte.net/
+servers:
+- url: https://api.forte.net/v3
+  description: Forte REST API v3 Production
+- url: https://sandbox.forte.net/api/v3
+  description: Forte REST API v3 Sandbox
+security:
+- basicAuth: []
+tags:
+- name: Settlements
+  description: Settlement query and reconciliation
+paths:
+  /organizations/{organizationId}/locations/{locationId}/settlements:
+    get:
+      operationId: listSettlements
+      summary: List settlements
+      description: Returns settlement records for reconciliation, including batch details and totals.
+      tags:
+      - Settlements
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: start_settle_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: end_settle_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: List of settlements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementList'
+components:
+  schemas:
+    SettlementList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settlement'
+    Settlement:
+      type: object
+      properties:
+        settlement_id:
+          type: string
+        settle_date:
+          type: string
+          format: date
+        total_approved:
+          type: number
+        total_credited:
+          type: number
+        transaction_count:
+          type: integer
+        status:
+          type: string
+          enum:
+          - pending
+          - settled
+          - failed
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using API access ID as username and API secure key as password. Include organization ID and location ID in the X-Forte-Auth-Organization-Id and X-Forte-Auth-Location-Id request headers.

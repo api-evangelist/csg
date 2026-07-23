@@ -1,0 +1,290 @@
+openapi: 3.1.0
+info:
+  title: CSG Forte REST Customers API
+  description: CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.
+  version: 3.0.0
+  contact:
+    name: Forte Support
+    url: https://support.forte.net/
+  license:
+    name: Forte Terms of Service
+    url: https://www.forte.net/
+servers:
+- url: https://api.forte.net/v3
+  description: Forte REST API v3 Production
+- url: https://sandbox.forte.net/api/v3
+  description: Forte REST API v3 Sandbox
+security:
+- basicAuth: []
+tags:
+- name: Customers
+  description: Customer record management
+paths:
+  /organizations/{organizationId}/locations/{locationId}/customers:
+    get:
+      operationId: listCustomers
+      summary: List customers
+      description: Returns a list of customer records for the specified location.
+      tags:
+      - Customers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: first_name
+        in: query
+        schema:
+          type: string
+      - name: last_name
+        in: query
+        schema:
+          type: string
+      - name: customer_token
+        in: query
+        schema:
+          type: string
+      - name: page_index
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 50
+      responses:
+        '200':
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerList'
+    post:
+      operationId: createCustomer
+      summary: Create a customer record
+      description: Creates a new customer record for storing payment method tokens and billing information.
+      tags:
+      - Customers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '201':
+          description: Customer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /organizations/{organizationId}/locations/{locationId}/customers/{customerId}:
+    get:
+      operationId: getCustomer
+      summary: Get customer details
+      description: Returns a specific customer record including stored payment methods.
+      tags:
+      - Customers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Customer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateCustomer
+      summary: Update a customer record
+      description: Updates an existing customer record.
+      tags:
+      - Customers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: Customer updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    delete:
+      operationId: deleteCustomer
+      summary: Delete a customer record
+      description: Permanently removes a customer record and all associated payment methods.
+      tags:
+      - Customers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Customer deleted
+components:
+  schemas:
+    Customer:
+      allOf:
+      - $ref: '#/components/schemas/CustomerSummary'
+      - type: object
+        properties:
+          email:
+            type: string
+            format: email
+          phone:
+            type: string
+          billing_address:
+            $ref: '#/components/schemas/Address'
+          updated_date:
+            type: string
+            format: date
+    Address:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        physical_address:
+          type: string
+        locality:
+          type: string
+          description: City
+        region:
+          type: string
+          description: State/province
+        postal_code:
+          type: string
+        country_code:
+          type: string
+          default: US
+    CustomerRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        billing_address:
+          $ref: '#/components/schemas/Address'
+    CustomerList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerSummary'
+    Error:
+      type: object
+      properties:
+        response_type:
+          type: string
+        response_code:
+          type: string
+        response_desc:
+          type: string
+    CustomerSummary:
+      type: object
+      properties:
+        customer_token:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        created_date:
+          type: string
+          format: date
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using API access ID as username and API secure key as password. Include organization ID and location ID in the X-Forte-Auth-Organization-Id and X-Forte-Auth-Location-Id request headers.

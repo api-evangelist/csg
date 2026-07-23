@@ -1,0 +1,466 @@
+openapi: 3.1.0
+info:
+  title: CSG Forte REST Customers Transactions API
+  description: CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.
+  version: 3.0.0
+  contact:
+    name: Forte Support
+    url: https://support.forte.net/
+  license:
+    name: Forte Terms of Service
+    url: https://www.forte.net/
+servers:
+- url: https://api.forte.net/v3
+  description: Forte REST API v3 Production
+- url: https://sandbox.forte.net/api/v3
+  description: Forte REST API v3 Sandbox
+security:
+- basicAuth: []
+tags:
+- name: Transactions
+  description: Payment transaction processing (credit card, echeck, scheduled)
+paths:
+  /organizations/{organizationId}/locations/{locationId}/transactions:
+    get:
+      operationId: listTransactions
+      summary: List transactions for a location
+      description: Returns a paginated list of transactions for the specified organization and location. Supports filtering by date range, status, and payment method type.
+      tags:
+      - Transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        description: Organization identifier (org_XXXXX format)
+        schema:
+          type: string
+          pattern: ^org_[A-Za-z0-9]+$
+      - name: locationId
+        in: path
+        required: true
+        description: Location identifier (loc_XXXXX format)
+        schema:
+          type: string
+          pattern: ^loc_[A-Za-z0-9]+$
+      - name: start_date
+        in: query
+        description: Filter transactions on or after this date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: Filter transactions on or before this date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: action
+        in: query
+        description: Filter by transaction action
+        schema:
+          type: string
+          enum:
+          - sale
+          - authorize
+          - capture
+          - void
+          - credit
+          - force
+      - name: response_code
+        in: query
+        description: Filter by response code (A for approved, D for declined, etc.)
+        schema:
+          type: string
+      - name: page_index
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 50
+          maximum: 200
+      responses:
+        '200':
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createTransaction
+      summary: Create a payment transaction
+      description: Submits a new payment transaction. Supports credit card sales, authorizations, captures, voids, credits, and ACH/echeck transactions. Also supports scheduled/recurring transactions.
+      tags:
+      - Transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '201':
+          description: Transaction created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /organizations/{organizationId}/locations/{locationId}/transactions/{transactionId}:
+    get:
+      operationId: getTransaction
+      summary: Get transaction details
+      description: Returns detailed information for a specific transaction.
+      tags:
+      - Transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transaction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateTransaction
+      summary: Update a transaction (void or capture)
+      description: Updates an existing transaction. Used to void, capture, or credit a prior transaction.
+      tags:
+      - Transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionUpdateRequest'
+      responses:
+        '200':
+          description: Transaction updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        transaction_id:
+          type: string
+          description: Unique transaction identifier (trn_XXXXX format)
+        location_id:
+          type: string
+        action:
+          type: string
+          enum:
+          - sale
+          - authorize
+          - capture
+          - void
+          - credit
+          - force
+          - verify
+        authorization_amount:
+          type: number
+          format: double
+        authorization_code:
+          type: string
+        entered_by:
+          type: string
+        received_date:
+          type: string
+          format: date-time
+        transaction_date:
+          type: string
+          format: date
+        response:
+          $ref: '#/components/schemas/TransactionResponse'
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        card:
+          $ref: '#/components/schemas/CardInfo'
+        echeck:
+          $ref: '#/components/schemas/EcheckInfo'
+        customer_token:
+          type: string
+        paymethod_token:
+          type: string
+        schedule_id:
+          type: string
+    CardRequest:
+      type: object
+      properties:
+        card_type:
+          type: string
+        name_on_card:
+          type: string
+        account_number:
+          type: string
+          description: Full card number (PCI sensitive)
+        expire_month:
+          type: string
+          pattern: ^(0[1-9]|1[0-2])$
+        expire_year:
+          type: string
+          pattern: ^[0-9]{4}$
+        cvv:
+          type: string
+    CardInfo:
+      type: object
+      properties:
+        card_type:
+          type: string
+          enum:
+          - visa
+          - mstr
+          - disc
+          - amex
+          - jcb
+          - dine
+          - enrt
+        name_on_card:
+          type: string
+        masked_account_number:
+          type: string
+          description: Masked card number (e.g., XXXX-XXXX-XXXX-1234)
+        expire_month:
+          type: string
+        expire_year:
+          type: string
+    TransactionList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        page_index:
+          type: integer
+        page_size:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+    TransactionRequest:
+      type: object
+      required:
+      - action
+      - authorization_amount
+      properties:
+        action:
+          type: string
+          enum:
+          - sale
+          - authorize
+          - capture
+          - void
+          - credit
+          - force
+          - verify
+        authorization_amount:
+          type: number
+          format: double
+          minimum: 0.01
+        entered_by:
+          type: string
+        order_number:
+          type: string
+        customer_token:
+          type: string
+        paymethod_token:
+          type: string
+        card:
+          $ref: '#/components/schemas/CardRequest'
+        echeck:
+          $ref: '#/components/schemas/EcheckRequest'
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        xdata:
+          type: object
+          description: Custom key-value pairs for extended transaction data
+          additionalProperties:
+            type: string
+    TransactionUpdateRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - capture
+          - void
+          - credit
+        authorization_amount:
+          type: number
+          format: double
+    Address:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        physical_address:
+          type: string
+        locality:
+          type: string
+          description: City
+        region:
+          type: string
+          description: State/province
+        postal_code:
+          type: string
+        country_code:
+          type: string
+          default: US
+    TransactionResponse:
+      type: object
+      properties:
+        environment:
+          type: string
+          enum:
+          - live
+          - sandbox
+        response_type:
+          type: string
+          enum:
+          - A
+          - D
+          - E
+          - F
+          - U
+          description: A=Approved, D=Declined, E=Error, F=Force, U=Undetermined
+        response_code:
+          type: string
+        response_desc:
+          type: string
+        authorization_code:
+          type: string
+        avs_result:
+          type: string
+        cvv_result:
+          type: string
+    Error:
+      type: object
+      properties:
+        response_type:
+          type: string
+        response_code:
+          type: string
+        response_desc:
+          type: string
+    EcheckRequest:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        account_number:
+          type: string
+        routing_number:
+          type: string
+        sec_code:
+          type: string
+          enum:
+          - PPD
+          - CCD
+          - WEB
+          - TEL
+    EcheckInfo:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        masked_account_number:
+          type: string
+        routing_number:
+          type: string
+  responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using API access ID as username and API secure key as password. Include organization ID and location ID in the X-Forte-Auth-Organization-Id and X-Forte-Auth-Location-Id request headers.

@@ -1,0 +1,203 @@
+openapi: 3.1.0
+info:
+  title: CSG Forte REST Customers Payment Methods API
+  description: CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.
+  version: 3.0.0
+  contact:
+    name: Forte Support
+    url: https://support.forte.net/
+  license:
+    name: Forte Terms of Service
+    url: https://www.forte.net/
+servers:
+- url: https://api.forte.net/v3
+  description: Forte REST API v3 Production
+- url: https://sandbox.forte.net/api/v3
+  description: Forte REST API v3 Sandbox
+security:
+- basicAuth: []
+tags:
+- name: Payment Methods
+  description: Payment method tokenization and management
+paths:
+  /organizations/{organizationId}/locations/{locationId}/paymentmethods:
+    get:
+      operationId: listPaymentMethods
+      summary: List payment methods for a location
+      description: Returns all stored payment method tokens for the location, optionally filtered by customer.
+      tags:
+      - Payment Methods
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customer_token
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of payment methods
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodList'
+    post:
+      operationId: createPaymentMethod
+      summary: Create a payment method token
+      description: Tokenizes a payment method (credit card or bank account) for future use.
+      tags:
+      - Payment Methods
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: locationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodRequest'
+      responses:
+        '201':
+          description: Payment method tokenized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+components:
+  schemas:
+    CardRequest:
+      type: object
+      properties:
+        card_type:
+          type: string
+        name_on_card:
+          type: string
+        account_number:
+          type: string
+          description: Full card number (PCI sensitive)
+        expire_month:
+          type: string
+          pattern: ^(0[1-9]|1[0-2])$
+        expire_year:
+          type: string
+          pattern: ^[0-9]{4}$
+        cvv:
+          type: string
+    CardInfo:
+      type: object
+      properties:
+        card_type:
+          type: string
+          enum:
+          - visa
+          - mstr
+          - disc
+          - amex
+          - jcb
+          - dine
+          - enrt
+        name_on_card:
+          type: string
+        masked_account_number:
+          type: string
+          description: Masked card number (e.g., XXXX-XXXX-XXXX-1234)
+        expire_month:
+          type: string
+        expire_year:
+          type: string
+    PaymentMethodRequest:
+      type: object
+      required:
+      - method_type
+      properties:
+        method_type:
+          type: string
+          enum:
+          - cc
+          - ec
+        customer_token:
+          type: string
+        card:
+          $ref: '#/components/schemas/CardRequest'
+        echeck:
+          $ref: '#/components/schemas/EcheckRequest'
+    PaymentMethodList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethod:
+      type: object
+      properties:
+        paymethod_token:
+          type: string
+        customer_token:
+          type: string
+        method_type:
+          type: string
+          enum:
+          - cc
+          - ec
+        card:
+          $ref: '#/components/schemas/CardInfo'
+        echeck:
+          $ref: '#/components/schemas/EcheckInfo'
+        created_date:
+          type: string
+          format: date
+    EcheckRequest:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        account_number:
+          type: string
+        routing_number:
+          type: string
+        sec_code:
+          type: string
+          enum:
+          - PPD
+          - CCD
+          - WEB
+          - TEL
+    EcheckInfo:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        masked_account_number:
+          type: string
+        routing_number:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using API access ID as username and API secure key as password. Include organization ID and location ID in the X-Forte-Auth-Organization-Id and X-Forte-Auth-Location-Id request headers.
