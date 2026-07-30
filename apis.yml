@@ -7,6 +7,19 @@ description: >-
   media, and entertainment companies to monetize and digitally enable customer experiences. CSG's developer surface
   includes the CSG Forte payments REST API, Forte.js client-side tokenization library, the Forte React Native SDK, and
   the Singleview convergent billing platform.
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
 tags:
   - Billing
@@ -20,98 +33,179 @@ specificationVersion: '0.19'
 created: '2026-03-18'
 modified: '2026-05-19'
 apis:
-  - aid: csg:csg-forte-rest-api
-    name: CSG Forte REST API
-    description: >-
-      CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API
-      enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely
-      manage customer and payment data, and query settlement information. Authentication uses HTTP Basic with
-      organization ID, location ID, and API key.
-    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
-    humanURL: https://developers.forte.net/
-    baseURL: https://api.forte.net/v3
-    tags:
-      - ACH
-      - Billing
-      - Credit Card
-      - Payments
-      - PCI
-      - REST
-    properties:
-      - url: https://developers.forte.net/introduction-rest-api/
-        type: Documentation
-      - url: https://restdocs.forte.net/
-        type: Reference
-      - url: https://developers.forte.net/getting-started/
-        type: GettingStarted
-      - url: https://www.forte.net/test-account-setup/
-        type: Sandbox
-      - url: https://releases.forte.net/
-        type: ChangeLog
-      - url: https://status.forte.net/
-        type: StatusPage
-      - url: https://support.forte.net/
-        type: Support
-      - url: https://training.forte.net/
-        type: Training
-      - url: openapi/csg-forte-rest-openapi.yml
-        type: OpenAPI
-      - url: json-schema/csg-forte-transaction-schema.json
-        type: JSONSchema
-      - url: json-ld/csg-context.jsonld
-        type: JSONLDContext
-  - aid: csg:csg-forte-js
-    name: CSG Forte.js
-    description: >-
-      Forte.js is a JavaScript library for secure browser-based payment tokenization. It enables web applications to
-      collect and tokenize payment card data client-side before submitting to Forte's payment API, reducing PCI scope.
-    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
-    humanURL: https://developers.forte.net/forte-js/
-    baseURL: https://api.forte.net
-    tags:
-      - JavaScript
-      - Payments
-      - SDK
-      - Web
-    properties:
-      - url: https://developers.forte.net/forte-js/
-        type: Documentation
-  - aid: csg:csg-forte-react-native-sdk
-    name: CSG Forte React Native SDK
-    description: >-
-      The Forte React Native SDK enables mobile application developers to integrate payment processing capabilities into
-      iOS and Android apps built with React Native.
-    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
-    humanURL: https://developers.forte.net/forte-react-native/
-    baseURL: https://api.forte.net
-    tags:
-      - Mobile
-      - Payments
-      - React Native
-      - SDK
-    properties:
-      - url: https://developers.forte.net/forte-react-native/
-        type: Documentation
-      - url: https://developers.forte.net/forte-react-native/
-        type: SDKs
-  - aid: csg:csg-singleview-api
-    name: CSG Singleview Billing API
-    description: >-
-      CSG Singleview is a comprehensive convergent billing and revenue management platform designed for communication
-      service providers. APIs enable subscriber billing, usage rating, invoice generation, and payment processing across
-      converged 5G and IoT services.
-    image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
-    humanURL: https://www.csgi.com/
-    baseURL: https://api.csgi.com
-    tags:
-      - Billing
-      - BSS
-      - Revenue Management
-      - SOAP
-      - Telecom
-    properties:
-      - url: https://www.csgi.com/
-        type: Documentation
+- aid: csg:csg-forte-js
+  name: CSG Forte.js
+  description: >-
+    Forte.js is a JavaScript library for secure browser-based payment tokenization. It enables web applications
+    to collect and tokenize payment card data client-side before submitting to Forte's payment API, reducing
+    PCI scope.
+  image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+  humanURL: https://developers.forte.net/forte-js/
+  baseURL: https://api.forte.net
+  tags:
+  - JavaScript
+  - Payments
+  - SDK
+  - Web
+  properties:
+  - url: https://developers.forte.net/forte-js/
+    type: Documentation
+- aid: csg:csg-forte-react-native-sdk
+  name: CSG Forte React Native SDK
+  description: >-
+    The Forte React Native SDK enables mobile application developers to integrate payment processing capabilities
+    into iOS and Android apps built with React Native.
+  image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+  humanURL: https://developers.forte.net/forte-react-native/
+  baseURL: https://api.forte.net
+  tags:
+  - Mobile
+  - Payments
+  - React Native
+  - SDK
+  properties:
+  - url: https://developers.forte.net/forte-react-native/
+    type: Documentation
+  - url: https://developers.forte.net/forte-react-native/
+    type: SDKs
+- aid: csg:csg-singleview-api
+  name: CSG Singleview Billing API
+  description: >-
+    CSG Singleview is a comprehensive convergent billing and revenue management platform designed for
+    communication service providers. APIs enable subscriber billing, usage rating, invoice generation,
+    and payment processing across converged 5G and IoT services.
+  image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
+  humanURL: https://www.csgi.com/
+  baseURL: https://api.csgi.com
+  tags:
+  - Billing
+  - BSS
+  - Revenue Management
+  - SOAP
+  - Telecom
+  properties:
+  - url: https://www.csgi.com/
+    type: Documentation
+- aid: csg:csg-customers-api
+  name: CSG Systems Customers API
+  description: Customer record management
+  humanURL: https://developers.forte.net/
+  baseURL: https://api.forte.net/v3
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/csg-customers-api-openapi.yml
+  - type: Documentation
+    url: https://developers.forte.net/introduction-rest-api/
+  - type: Reference
+    url: https://restdocs.forte.net/
+  - type: GettingStarted
+    url: https://developers.forte.net/getting-started/
+  - type: Sandbox
+    url: https://www.forte.net/test-account-setup/
+  - type: ChangeLog
+    url: https://releases.forte.net/
+  - type: StatusPage
+    url: https://status.forte.net/
+  - type: Support
+    url: https://support.forte.net/
+  - type: Training
+    url: https://training.forte.net/
+  - type: JSONSchema
+    url: json-schema/csg-forte-transaction-schema.json
+  - type: JSONLDContext
+    url: json-ld/csg-context.jsonld
+- aid: csg:csg-payment-methods-api
+  name: CSG Systems Payment Methods API
+  description: Payment method tokenization and management
+  humanURL: https://developers.forte.net/
+  baseURL: https://api.forte.net/v3
+  tags:
+  - Payment Methods
+  properties:
+  - type: OpenAPI
+    url: openapi/csg-payment-methods-api-openapi.yml
+  - type: Documentation
+    url: https://developers.forte.net/introduction-rest-api/
+  - type: Reference
+    url: https://restdocs.forte.net/
+  - type: GettingStarted
+    url: https://developers.forte.net/getting-started/
+  - type: Sandbox
+    url: https://www.forte.net/test-account-setup/
+  - type: ChangeLog
+    url: https://releases.forte.net/
+  - type: StatusPage
+    url: https://status.forte.net/
+  - type: Support
+    url: https://support.forte.net/
+  - type: Training
+    url: https://training.forte.net/
+  - type: JSONSchema
+    url: json-schema/csg-forte-transaction-schema.json
+  - type: JSONLDContext
+    url: json-ld/csg-context.jsonld
+- aid: csg:csg-settlements-api
+  name: CSG Systems Settlements API
+  description: Settlement query and reconciliation
+  humanURL: https://developers.forte.net/
+  baseURL: https://api.forte.net/v3
+  tags:
+  - Settlements
+  properties:
+  - type: OpenAPI
+    url: openapi/csg-settlements-api-openapi.yml
+  - type: Documentation
+    url: https://developers.forte.net/introduction-rest-api/
+  - type: Reference
+    url: https://restdocs.forte.net/
+  - type: GettingStarted
+    url: https://developers.forte.net/getting-started/
+  - type: Sandbox
+    url: https://www.forte.net/test-account-setup/
+  - type: ChangeLog
+    url: https://releases.forte.net/
+  - type: StatusPage
+    url: https://status.forte.net/
+  - type: Support
+    url: https://support.forte.net/
+  - type: Training
+    url: https://training.forte.net/
+  - type: JSONSchema
+    url: json-schema/csg-forte-transaction-schema.json
+  - type: JSONLDContext
+    url: json-ld/csg-context.jsonld
+- aid: csg:csg-transactions-api
+  name: CSG Systems Transactions API
+  description: Payment transaction processing (credit card, echeck, scheduled)
+  humanURL: https://developers.forte.net/
+  baseURL: https://api.forte.net/v3
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/csg-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developers.forte.net/introduction-rest-api/
+  - type: Reference
+    url: https://restdocs.forte.net/
+  - type: GettingStarted
+    url: https://developers.forte.net/getting-started/
+  - type: Sandbox
+    url: https://www.forte.net/test-account-setup/
+  - type: ChangeLog
+    url: https://releases.forte.net/
+  - type: StatusPage
+    url: https://status.forte.net/
+  - type: Support
+    url: https://support.forte.net/
+  - type: Training
+    url: https://training.forte.net/
+  - type: JSONSchema
+    url: json-schema/csg-forte-transaction-schema.json
+  - type: JSONLDContext
+    url: json-ld/csg-context.jsonld
 features:
   - name: PCI-Scoped Payment Processing
     description: REST endpoints for credit card, echeck, and scheduled transactions inside a PCI-compliant architecture.
