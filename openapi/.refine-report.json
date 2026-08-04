@@ -1,0 +1,20 @@
+{
+  "provider": "csg",
+  "sources": [
+    "csg-customers-api-openapi.yml",
+    "csg-payment-methods-api-openapi.yml",
+    "csg-settlements-api-openapi.yml",
+    "csg-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "csg-customers-api-openapi.yml",
+    "csg-payment-methods-api-openapi.yml",
+    "csg-settlements-api-openapi.yml",
+    "csg-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
