@@ -247,7 +247,7 @@ common:
     url: https://www.linkedin.com/company/csg-
   - url: https://www.csgi.com/
     type: Website
-  - url: openapi/csg-forte-rest-openapi.yml
+  - url: openapi/_original/csg-forte-rest-openapi.yml
     type: OpenAPI
   - url: json-schema/csg-forte-transaction-schema.json
     type: JSONSchema
