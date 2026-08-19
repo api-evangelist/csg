@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CSG Forte REST Customers Settlements API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List settlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.forte.net/v3/organizations/:organizationId/locations/:locationId/settlements",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_settle_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_settle_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns settlement records for reconciliation, including batch details and totals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

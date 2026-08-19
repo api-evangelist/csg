@@ -1,0 +1,309 @@
+{
+  "item": [
+    {
+      "id": "e4bc6cd6-98b5-4d5b-bd4e-22a36f8d3582",
+      "name": "Payment Methods",
+      "description": {
+        "content": "Payment method tokenization and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "32e1c060-1a92-4fdc-8c29-9ff412999f20",
+          "name": "List payment methods for a location",
+          "request": {
+            "name": "List payment methods for a location",
+            "description": {
+              "content": "Returns all stored payment method tokens for the location, optionally filtered by customer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "locations",
+                ":locationId",
+                "paymentmethods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customer_token",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "831b3469-64c9-4bb6-8b7c-ce9adb462fa9",
+              "name": "List of payment methods",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "paymentmethods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customer_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"number_results\": 6307,\n  \"results\": [\n    {\n      \"paymethod_token\": \"string\",\n      \"customer_token\": \"string\",\n      \"method_type\": \"ec\",\n      \"card\": {\n        \"card_type\": \"dine\",\n        \"name_on_card\": \"string\",\n        \"masked_account_number\": \"string\",\n        \"expire_month\": \"string\",\n        \"expire_year\": \"string\"\n      },\n      \"echeck\": {\n        \"account_type\": \"checking\",\n        \"masked_account_number\": \"string\",\n        \"routing_number\": \"string\"\n      },\n      \"created_date\": \"1977-09-18\"\n    },\n    {\n      \"paymethod_token\": \"string\",\n      \"customer_token\": \"string\",\n      \"method_type\": \"ec\",\n      \"card\": {\n        \"card_type\": \"jcb\",\n        \"name_on_card\": \"string\",\n        \"masked_account_number\": \"string\",\n        \"expire_month\": \"string\",\n        \"expire_year\": \"string\"\n      },\n      \"echeck\": {\n        \"account_type\": \"checking\",\n        \"masked_account_number\": \"string\",\n        \"routing_number\": \"string\"\n      },\n      \"created_date\": \"1999-05-04\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b0135b7-fc2c-431c-815a-ba7b0f92bf37",
+          "name": "Create a payment method token",
+          "request": {
+            "name": "Create a payment method token",
+            "description": {
+              "content": "Tokenizes a payment method (credit card or bank account) for future use.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "locations",
+                ":locationId",
+                "paymentmethods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"method_type\": \"<string>\",\n  \"customer_token\": \"<string>\",\n  \"card\": {\n    \"card_type\": \"<string>\",\n    \"name_on_card\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"expire_month\": \"<string>\",\n    \"expire_year\": \"<string>\",\n    \"cvv\": \"<string>\"\n  },\n  \"echeck\": {\n    \"account_type\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"routing_number\": \"<string>\",\n    \"sec_code\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "917b60e4-7db9-47d7-8ad3-cd080c0d50b5",
+              "name": "Payment method tokenized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "paymentmethods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method_type\": \"<string>\",\n  \"customer_token\": \"<string>\",\n  \"card\": {\n    \"card_type\": \"string\",\n    \"name_on_card\": \"string\",\n    \"account_number\": \"string\",\n    \"expire_month\": \"12\",\n    \"expire_year\": \"8283\",\n    \"cvv\": \"string\"\n  },\n  \"echeck\": {\n    \"account_type\": \"checking\",\n    \"account_number\": \"string\",\n    \"routing_number\": \"string\",\n    \"sec_code\": \"CCD\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymethod_token\": \"string\",\n  \"customer_token\": \"string\",\n  \"method_type\": \"ec\",\n  \"card\": {\n    \"card_type\": \"jcb\",\n    \"name_on_card\": \"string\",\n    \"masked_account_number\": \"string\",\n    \"expire_month\": \"string\",\n    \"expire_year\": \"string\"\n  },\n  \"echeck\": {\n    \"account_type\": \"savings\",\n    \"masked_account_number\": \"string\",\n    \"routing_number\": \"string\"\n  },\n  \"created_date\": \"1962-01-27\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.forte.net/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8b051873-0e28-4afa-9bb9-38214f618720",
+    "name": "CSG Forte REST Customers Payment Methods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.\n\nContact Support:\n Name: Forte Support",
+      "type": "text/plain"
+    }
+  }
+}

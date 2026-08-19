@@ -1,0 +1,181 @@
+{
+  "item": [
+    {
+      "id": "17b2887c-7386-43a3-ad99-84687333e68b",
+      "name": "Settlements",
+      "description": {
+        "content": "Settlement query and reconciliation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "780d62fe-5d05-456c-95c1-deaf8b6b9342",
+          "name": "List settlements",
+          "request": {
+            "name": "List settlements",
+            "description": {
+              "content": "Returns settlement records for reconciliation, including batch details and totals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "locations",
+                ":locationId",
+                "settlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_settle_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_settle_date",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fba23b9-0bba-4068-bf8d-ac2c2e827f72",
+              "name": "List of settlements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_settle_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_settle_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"number_results\": 8122,\n  \"results\": [\n    {\n      \"settlement_id\": \"string\",\n      \"settle_date\": \"1969-09-02\",\n      \"total_approved\": 7023.329934708725,\n      \"total_credited\": 7602.929934665598,\n      \"transaction_count\": 1798,\n      \"status\": \"settled\"\n    },\n    {\n      \"settlement_id\": \"string\",\n      \"settle_date\": \"1955-05-27\",\n      \"total_approved\": 8188.60255462475,\n      \"total_credited\": 3978.2626648273335,\n      \"transaction_count\": 9811,\n      \"status\": \"settled\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.forte.net/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3a49547f-a353-4a44-9dd2-c781aee928ef",
+    "name": "CSG Forte REST Customers Settlements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.\n\nContact Support:\n Name: Forte Support",
+      "type": "text/plain"
+    }
+  }
+}

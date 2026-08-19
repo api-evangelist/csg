@@ -1,0 +1,957 @@
+{
+  "item": [
+    {
+      "id": "8563cce0-5591-4652-81a5-5c7f4fe01801",
+      "name": "Transactions",
+      "description": {
+        "content": "Payment transaction processing (credit card, echeck, scheduled)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f14d9a7-c710-49d1-8066-fd02129c518e",
+          "name": "List transactions for a location",
+          "request": {
+            "name": "List transactions for a location",
+            "description": {
+              "content": "Returns a paginated list of transactions for the specified organization and location. Supports filtering by date range, status, and payment method type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "locations",
+                ":locationId",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Filter transactions on or after this date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Filter transactions on or before this date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "Filter by transaction action"
+                },
+                {
+                  "disabled": false,
+                  "key": "response_code",
+                  "value": "<string>",
+                  "description": "Filter by response code (A for approved, D for declined, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_index",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "50"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) Organization identifier (org_XXXXX format)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) Location identifier (loc_XXXXX format)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d12a550-e764-4235-a8a6-ddc0ba934c62",
+              "name": "List of transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_index",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Organization identifier (org_XXXXX format)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) Location identifier (loc_XXXXX format)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"number_results\": 5270,\n  \"page_index\": 7509,\n  \"page_size\": 7172,\n  \"results\": [\n    {\n      \"transaction_id\": \"string\",\n      \"location_id\": \"string\",\n      \"action\": \"sale\",\n      \"authorization_amount\": 3714.0905410137493,\n      \"authorization_code\": \"string\",\n      \"entered_by\": \"string\",\n      \"received_date\": \"1984-09-20T16:38:34.315Z\",\n      \"transaction_date\": \"2008-07-11\",\n      \"response\": {\n        \"environment\": \"live\",\n        \"response_type\": \"D\",\n        \"response_code\": \"string\",\n        \"response_desc\": \"string\",\n        \"authorization_code\": \"string\",\n        \"avs_result\": \"string\",\n        \"cvv_result\": \"string\"\n      },\n      \"billing_address\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"company_name\": \"string\",\n        \"physical_address\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country_code\": \"US\"\n      },\n      \"card\": {\n        \"card_type\": \"jcb\",\n        \"name_on_card\": \"string\",\n        \"masked_account_number\": \"string\",\n        \"expire_month\": \"string\",\n        \"expire_year\": \"string\"\n      },\n      \"echeck\": {\n        \"account_type\": \"checking\",\n        \"masked_account_number\": \"string\",\n        \"routing_number\": \"string\"\n      },\n      \"customer_token\": \"string\",\n      \"paymethod_token\": \"string\",\n      \"schedule_id\": \"string\"\n    },\n    {\n      \"transaction_id\": \"string\",\n      \"location_id\": \"string\",\n      \"action\": \"capture\",\n      \"authorization_amount\": 2991.1183933546636,\n      \"authorization_code\": \"string\",\n      \"entered_by\": \"string\",\n      \"received_date\": \"1984-08-28T01:16:24.498Z\",\n      \"transaction_date\": \"2026-05-15\",\n      \"response\": {\n        \"environment\": \"sandbox\",\n        \"response_type\": \"D\",\n        \"response_code\": \"string\",\n        \"response_desc\": \"string\",\n        \"authorization_code\": \"string\",\n        \"avs_result\": \"string\",\n        \"cvv_result\": \"string\"\n      },\n      \"billing_address\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"company_name\": \"string\",\n        \"physical_address\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country_code\": \"US\"\n      },\n      \"card\": {\n        \"card_type\": \"mstr\",\n        \"name_on_card\": \"string\",\n        \"masked_account_number\": \"string\",\n        \"expire_month\": \"string\",\n        \"expire_year\": \"string\"\n      },\n      \"echeck\": {\n        \"account_type\": \"savings\",\n        \"masked_account_number\": \"string\",\n        \"routing_number\": \"string\"\n      },\n      \"customer_token\": \"string\",\n      \"paymethod_token\": \"string\",\n      \"schedule_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06a3948c-c3f0-47ad-9329-5d7f4e7c5a7a",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_index",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Organization identifier (org_XXXXX format)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) Location identifier (loc_XXXXX format)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response_type\": \"string\",\n  \"response_code\": \"string\",\n  \"response_desc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba9d591e-199c-404e-acec-b4d99f6cb4c0",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_index",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Organization identifier (org_XXXXX format)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) Location identifier (loc_XXXXX format)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response_type\": \"string\",\n  \"response_code\": \"string\",\n  \"response_desc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75a13b71-3449-47d4-9c3c-42319b7fc64f",
+          "name": "Create a payment transaction",
+          "request": {
+            "name": "Create a payment transaction",
+            "description": {
+              "content": "Submits a new payment transaction. Supports credit card sales, authorizations, captures, voids, credits, and ACH/echeck transactions. Also supports scheduled/recurring transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "locations",
+                ":locationId",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"authorization_amount\": \"<double>\",\n  \"entered_by\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"customer_token\": \"<string>\",\n  \"paymethod_token\": \"<string>\",\n  \"card\": {\n    \"card_type\": \"<string>\",\n    \"name_on_card\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"expire_month\": \"<string>\",\n    \"expire_year\": \"<string>\",\n    \"cvv\": \"<string>\"\n  },\n  \"echeck\": {\n    \"account_type\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"routing_number\": \"<string>\",\n    \"sec_code\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"physical_address\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country_code\": \"US\"\n  },\n  \"xdata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5fde4772-b987-4863-9818-5bb2a998dcf0",
+              "name": "Transaction created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"authorization_amount\": \"<double>\",\n  \"entered_by\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"customer_token\": \"<string>\",\n  \"paymethod_token\": \"<string>\",\n  \"card\": {\n    \"card_type\": \"string\",\n    \"name_on_card\": \"string\",\n    \"account_number\": \"string\",\n    \"expire_month\": \"09\",\n    \"expire_year\": \"6227\",\n    \"cvv\": \"string\"\n  },\n  \"echeck\": {\n    \"account_type\": \"checking\",\n    \"account_number\": \"string\",\n    \"routing_number\": \"string\",\n    \"sec_code\": \"WEB\"\n  },\n  \"billing_address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company_name\": \"string\",\n    \"physical_address\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country_code\": \"US\"\n  },\n  \"xdata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_id\": \"string\",\n  \"location_id\": \"string\",\n  \"action\": \"verify\",\n  \"authorization_amount\": 3006.7965065147473,\n  \"authorization_code\": \"string\",\n  \"entered_by\": \"string\",\n  \"received_date\": \"2026-05-29T14:38:45.707Z\",\n  \"transaction_date\": \"1999-12-24\",\n  \"response\": {\n    \"environment\": \"sandbox\",\n    \"response_type\": \"E\",\n    \"response_code\": \"string\",\n    \"response_desc\": \"string\",\n    \"authorization_code\": \"string\",\n    \"avs_result\": \"string\",\n    \"cvv_result\": \"string\"\n  },\n  \"billing_address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company_name\": \"string\",\n    \"physical_address\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country_code\": \"US\"\n  },\n  \"card\": {\n    \"card_type\": \"jcb\",\n    \"name_on_card\": \"string\",\n    \"masked_account_number\": \"string\",\n    \"expire_month\": \"string\",\n    \"expire_year\": \"string\"\n  },\n  \"echeck\": {\n    \"account_type\": \"savings\",\n    \"masked_account_number\": \"string\",\n    \"routing_number\": \"string\"\n  },\n  \"customer_token\": \"string\",\n  \"paymethod_token\": \"string\",\n  \"schedule_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fc6252a-8a35-4177-96d0-4977e6fdc2aa",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"authorization_amount\": \"<double>\",\n  \"entered_by\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"customer_token\": \"<string>\",\n  \"paymethod_token\": \"<string>\",\n  \"card\": {\n    \"card_type\": \"string\",\n    \"name_on_card\": \"string\",\n    \"account_number\": \"string\",\n    \"expire_month\": \"09\",\n    \"expire_year\": \"6227\",\n    \"cvv\": \"string\"\n  },\n  \"echeck\": {\n    \"account_type\": \"checking\",\n    \"account_number\": \"string\",\n    \"routing_number\": \"string\",\n    \"sec_code\": \"WEB\"\n  },\n  \"billing_address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company_name\": \"string\",\n    \"physical_address\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country_code\": \"US\"\n  },\n  \"xdata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response_type\": \"string\",\n  \"response_code\": \"string\",\n  \"response_desc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f58ae9f8-af41-4e45-a20f-b4dd4a851992",
+          "name": "Get transaction details",
+          "request": {
+            "name": "Get transaction details",
+            "description": {
+              "content": "Returns detailed information for a specific transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "locations",
+                ":locationId",
+                "transactions",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e21f20a2-1684-4f0b-8f97-6a007e320d34",
+              "name": "Transaction details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_id\": \"string\",\n  \"location_id\": \"string\",\n  \"action\": \"verify\",\n  \"authorization_amount\": 3006.7965065147473,\n  \"authorization_code\": \"string\",\n  \"entered_by\": \"string\",\n  \"received_date\": \"2026-05-29T14:38:45.707Z\",\n  \"transaction_date\": \"1999-12-24\",\n  \"response\": {\n    \"environment\": \"sandbox\",\n    \"response_type\": \"E\",\n    \"response_code\": \"string\",\n    \"response_desc\": \"string\",\n    \"authorization_code\": \"string\",\n    \"avs_result\": \"string\",\n    \"cvv_result\": \"string\"\n  },\n  \"billing_address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company_name\": \"string\",\n    \"physical_address\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country_code\": \"US\"\n  },\n  \"card\": {\n    \"card_type\": \"jcb\",\n    \"name_on_card\": \"string\",\n    \"masked_account_number\": \"string\",\n    \"expire_month\": \"string\",\n    \"expire_year\": \"string\"\n  },\n  \"echeck\": {\n    \"account_type\": \"savings\",\n    \"masked_account_number\": \"string\",\n    \"routing_number\": \"string\"\n  },\n  \"customer_token\": \"string\",\n  \"paymethod_token\": \"string\",\n  \"schedule_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1ef7348-4591-4469-9d25-cf332bceb7a9",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response_type\": \"string\",\n  \"response_code\": \"string\",\n  \"response_desc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a11e7655-1b6e-4814-8df9-ec56ade21bdb",
+          "name": "Update a transaction (void or capture)",
+          "request": {
+            "name": "Update a transaction (void or capture)",
+            "description": {
+              "content": "Updates an existing transaction. Used to void, capture, or credit a prior transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "locations",
+                ":locationId",
+                "transactions",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"authorization_amount\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92145f9c-c578-4b9e-b72b-2a5c6ed73d80",
+              "name": "Transaction updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "locations",
+                    ":locationId",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"authorization_amount\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_id\": \"string\",\n  \"location_id\": \"string\",\n  \"action\": \"verify\",\n  \"authorization_amount\": 3006.7965065147473,\n  \"authorization_code\": \"string\",\n  \"entered_by\": \"string\",\n  \"received_date\": \"2026-05-29T14:38:45.707Z\",\n  \"transaction_date\": \"1999-12-24\",\n  \"response\": {\n    \"environment\": \"sandbox\",\n    \"response_type\": \"E\",\n    \"response_code\": \"string\",\n    \"response_desc\": \"string\",\n    \"authorization_code\": \"string\",\n    \"avs_result\": \"string\",\n    \"cvv_result\": \"string\"\n  },\n  \"billing_address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company_name\": \"string\",\n    \"physical_address\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country_code\": \"US\"\n  },\n  \"card\": {\n    \"card_type\": \"jcb\",\n    \"name_on_card\": \"string\",\n    \"masked_account_number\": \"string\",\n    \"expire_month\": \"string\",\n    \"expire_year\": \"string\"\n  },\n  \"echeck\": {\n    \"account_type\": \"savings\",\n    \"masked_account_number\": \"string\",\n    \"routing_number\": \"string\"\n  },\n  \"customer_token\": \"string\",\n  \"paymethod_token\": \"string\",\n  \"schedule_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.forte.net/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a129775b-8806-47ae-883d-f5859e4ed2dc",
+    "name": "CSG Forte REST Customers Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.\n\nContact Support:\n Name: Forte Support",
+      "type": "text/plain"
+    }
+  }
+}
