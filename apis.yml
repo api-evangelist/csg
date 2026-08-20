@@ -152,6 +152,8 @@ apis:
   humanURL: https://developers.forte.net/
   baseURL: https://api.forte.net/v3
   tags:
+  - Settlement
+  tags_raw:
   - Settlements
   properties:
   - type: OpenAPI
@@ -182,6 +184,8 @@ apis:
   humanURL: https://developers.forte.net/
   baseURL: https://api.forte.net/v3
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
