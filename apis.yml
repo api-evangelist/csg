@@ -248,6 +248,9 @@ useCases:
   - name: Marketplace Payouts
     description: Platforms reconcile and settle funds across many merchant locations.
 common:
+  - type: CapabilityMap
+    url: capabilities/csg-capability-edges.yml
+    name: CSG Systems Business Capability Map
   - type: AgenticAccess
     url: agentic-access/csg-agentic-access.yml
   - type: VulnerabilityDisclosure

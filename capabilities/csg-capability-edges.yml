@@ -1,0 +1,37 @@
+slug: csg
+provider: CSG Systems
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Payment Methods
+  spec_file: csg-payment-methods-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: createPaymentMethod "Create a payment method token"; schemas CardRequest, EcheckInfo, PaymentMethodList
+  reason: Stored payment instrument (card/echeck) tokenisation and listing. The candidate list has no
+    generic payments capability; BC-4250.40 explicitly covers "Payment-method management, payment authorisation",
+    which is what these operations do. Moderate confidence because this vendor surface is merchant acquiring,
+    not subscription billing per se.
+- tag: Transactions
+  spec_file: csg-transactions-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: createTransaction "Create a payment transaction"; updateTransaction "Update a transaction
+    (void or capture)"
+  reason: Authorisation, capture and void of card/echeck payments — payment collection/authorisation.
+    Mapped to the only payment-execution capability available in the frame; sub-capability chosen because
+    "payment authorisation" is named there explicitly.
