@@ -31,7 +31,6 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
-image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
 tags:
   - Billing
   - Customer Engagement
@@ -50,7 +49,6 @@ apis:
     Forte.js is a JavaScript library for secure browser-based payment tokenization. It enables web applications
     to collect and tokenize payment card data client-side before submitting to Forte's payment API, reducing
     PCI scope.
-  image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
   humanURL: https://developers.forte.net/forte-js/
   baseURL: https://api.forte.net
   tags:
@@ -66,7 +64,6 @@ apis:
   description: >-
     The Forte React Native SDK enables mobile application developers to integrate payment processing capabilities
     into iOS and Android apps built with React Native.
-  image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
   humanURL: https://developers.forte.net/forte-react-native/
   baseURL: https://api.forte.net
   tags:
@@ -85,7 +82,6 @@ apis:
     CSG Singleview is a comprehensive convergent billing and revenue management platform designed for
     communication service providers. APIs enable subscriber billing, usage rating, invoice generation,
     and payment processing across converged 5G and IoT services.
-  image: https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/image.png
   humanURL: https://www.csgi.com/
   baseURL: https://api.csgi.com
   tags:
