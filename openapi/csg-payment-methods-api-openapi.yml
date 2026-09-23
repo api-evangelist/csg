@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CSG Forte REST Customers Payment Methods API
+  title: CSG Forte REST Payment Methods API
   description: CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.
   version: 3.0.0
   contact:
@@ -81,23 +81,61 @@ paths:
                 $ref: '#/components/schemas/PaymentMethod'
 components:
   schemas:
-    CardRequest:
+    PaymentMethodRequest:
+      type: object
+      required:
+      - method_type
+      properties:
+        method_type:
+          type: string
+          enum:
+          - cc
+          - ec
+        customer_token:
+          type: string
+        card:
+          $ref: '#/components/schemas/CardRequest'
+        echeck:
+          $ref: '#/components/schemas/EcheckRequest'
+    PaymentMethod:
       type: object
       properties:
-        card_type:
+        paymethod_token:
           type: string
-        name_on_card:
+        customer_token:
           type: string
-        account_number:
+        method_type:
           type: string
-          description: Full card number (PCI sensitive)
-        expire_month:
+          enum:
+          - cc
+          - ec
+        card:
+          $ref: '#/components/schemas/CardInfo'
+        echeck:
+          $ref: '#/components/schemas/EcheckInfo'
+        created_date:
           type: string
-          pattern: ^(0[1-9]|1[0-2])$
-        expire_year:
+          format: date
+    PaymentMethodList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+    EcheckInfo:
+      type: object
+      properties:
+        account_type:
           type: string
-          pattern: ^[0-9]{4}$
-        cvv:
+          enum:
+          - checking
+          - savings
+        masked_account_number:
+          type: string
+        routing_number:
           type: string
     CardInfo:
       type: object
@@ -121,50 +159,24 @@ components:
           type: string
         expire_year:
           type: string
-    PaymentMethodRequest:
-      type: object
-      required:
-      - method_type
-      properties:
-        method_type:
-          type: string
-          enum:
-          - cc
-          - ec
-        customer_token:
-          type: string
-        card:
-          $ref: '#/components/schemas/CardRequest'
-        echeck:
-          $ref: '#/components/schemas/EcheckRequest'
-    PaymentMethodList:
+    CardRequest:
       type: object
       properties:
-        number_results:
-          type: integer
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethod'
-    PaymentMethod:
-      type: object
-      properties:
-        paymethod_token:
+        card_type:
           type: string
-        customer_token:
+        name_on_card:
           type: string
-        method_type:
+        account_number:
           type: string
-          enum:
-          - cc
-          - ec
-        card:
-          $ref: '#/components/schemas/CardInfo'
-        echeck:
-          $ref: '#/components/schemas/EcheckInfo'
-        created_date:
+          description: Full card number (PCI sensitive)
+        expire_month:
           type: string
-          format: date
+          pattern: ^(0[1-9]|1[0-2])$
+        expire_year:
+          type: string
+          pattern: ^[0-9]{4}$
+        cvv:
+          type: string
     EcheckRequest:
       type: object
       properties:
@@ -184,18 +196,6 @@ components:
           - CCD
           - WEB
           - TEL
-    EcheckInfo:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        masked_account_number:
-          type: string
-        routing_number:
-          type: string
   securitySchemes:
     basicAuth:
       type: http

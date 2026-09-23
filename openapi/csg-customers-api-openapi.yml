@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: CSG Forte REST Customers API
   description: CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses standard HTTP credential headers with organization ID, location ID, and API key.
@@ -191,21 +191,6 @@ paths:
           description: Customer deleted
 components:
   schemas:
-    Customer:
-      allOf:
-      - $ref: '#/components/schemas/CustomerSummary'
-      - type: object
-        properties:
-          email:
-            type: string
-            format: email
-          phone:
-            type: string
-          billing_address:
-            $ref: '#/components/schemas/Address'
-          updated_date:
-            type: string
-            format: date
     Address:
       type: object
       properties:
@@ -244,24 +229,21 @@ components:
           type: string
         billing_address:
           $ref: '#/components/schemas/Address'
-    CustomerList:
-      type: object
-      properties:
-        number_results:
-          type: integer
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerSummary'
-    Error:
-      type: object
-      properties:
-        response_type:
-          type: string
-        response_code:
-          type: string
-        response_desc:
-          type: string
+    Customer:
+      allOf:
+      - $ref: '#/components/schemas/CustomerSummary'
+      - type: object
+        properties:
+          email:
+            type: string
+            format: email
+          phone:
+            type: string
+          billing_address:
+            $ref: '#/components/schemas/Address'
+          updated_date:
+            type: string
+            format: date
     CustomerSummary:
       type: object
       properties:
@@ -276,6 +258,24 @@ components:
         created_date:
           type: string
           format: date
+    Error:
+      type: object
+      properties:
+        response_type:
+          type: string
+        response_code:
+          type: string
+        response_desc:
+          type: string
+    CustomerList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerSummary'
   responses:
     NotFound:
       description: Resource not found
