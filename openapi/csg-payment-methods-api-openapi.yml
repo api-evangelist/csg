@@ -97,6 +97,55 @@ components:
           $ref: '#/components/schemas/CardRequest'
         echeck:
           $ref: '#/components/schemas/EcheckRequest'
+    CardRequest:
+      type: object
+      properties:
+        card_type:
+          type: string
+        name_on_card:
+          type: string
+        account_number:
+          type: string
+          description: Full card number (PCI sensitive)
+        expire_month:
+          type: string
+          pattern: ^(0[1-9]|1[0-2])$
+        expire_year:
+          type: string
+          pattern: ^[0-9]{4}$
+        cvv:
+          type: string
+    EcheckInfo:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        masked_account_number:
+          type: string
+        routing_number:
+          type: string
+    EcheckRequest:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        account_number:
+          type: string
+        routing_number:
+          type: string
+        sec_code:
+          type: string
+          enum:
+          - PPD
+          - CCD
+          - WEB
+          - TEL
     PaymentMethod:
       type: object
       properties:
@@ -125,18 +174,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentMethod'
-    EcheckInfo:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        masked_account_number:
-          type: string
-        routing_number:
-          type: string
     CardInfo:
       type: object
       properties:
@@ -159,43 +196,6 @@ components:
           type: string
         expire_year:
           type: string
-    CardRequest:
-      type: object
-      properties:
-        card_type:
-          type: string
-        name_on_card:
-          type: string
-        account_number:
-          type: string
-          description: Full card number (PCI sensitive)
-        expire_month:
-          type: string
-          pattern: ^(0[1-9]|1[0-2])$
-        expire_year:
-          type: string
-          pattern: ^[0-9]{4}$
-        cvv:
-          type: string
-    EcheckRequest:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        account_number:
-          type: string
-        routing_number:
-          type: string
-        sec_code:
-          type: string
-          enum:
-          - PPD
-          - CCD
-          - WEB
-          - TEL
   securitySchemes:
     basicAuth:
       type: http

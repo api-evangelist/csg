@@ -191,6 +191,20 @@ paths:
           description: Customer deleted
 components:
   schemas:
+    CustomerSummary:
+      type: object
+      properties:
+        customer_token:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        created_date:
+          type: string
+          format: date
     Address:
       type: object
       properties:
@@ -244,29 +258,6 @@ components:
           updated_date:
             type: string
             format: date
-    CustomerSummary:
-      type: object
-      properties:
-        customer_token:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        company_name:
-          type: string
-        created_date:
-          type: string
-          format: date
-    Error:
-      type: object
-      properties:
-        response_type:
-          type: string
-        response_code:
-          type: string
-        response_desc:
-          type: string
     CustomerList:
       type: object
       properties:
@@ -276,6 +267,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomerSummary'
+    Error:
+      type: object
+      properties:
+        response_type:
+          type: string
+        response_code:
+          type: string
+        response_desc:
+          type: string
   responses:
     NotFound:
       description: Resource not found

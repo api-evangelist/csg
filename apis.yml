@@ -37,6 +37,12 @@ tags:
   - Customer Engagement
   - Payments
   - Revenue Management
+  - Telecommunications
+tags_raw:
+  - Billing
+  - Customer Engagement
+  - Payments
+  - Revenue Management
   - Telecom
 type: Index
 access: 3rd-Party
@@ -86,6 +92,12 @@ apis:
   humanURL: https://www.csgi.com/
   baseURL: https://api.csgi.com
   tags:
+  - Billing
+  - BSS
+  - Revenue Management
+  - SOAP
+  - Telecommunications
+  tags_raw:
   - Billing
   - BSS
   - Revenue Management

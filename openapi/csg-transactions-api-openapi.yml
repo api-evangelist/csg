@@ -200,8 +200,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
@@ -212,26 +212,70 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    TransactionList:
+    CardRequest:
       type: object
       properties:
-        number_results:
-          type: integer
-        page_index:
-          type: integer
-        page_size:
-          type: integer
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
+        card_type:
+          type: string
+        name_on_card:
+          type: string
+        account_number:
+          type: string
+          description: Full card number (PCI sensitive)
+        expire_month:
+          type: string
+          pattern: ^(0[1-9]|1[0-2])$
+        expire_year:
+          type: string
+          pattern: ^[0-9]{4}$
+        cvv:
+          type: string
+    TransactionResponse:
+      type: object
+      properties:
+        environment:
+          type: string
+          enum:
+          - live
+          - sandbox
+        response_type:
+          type: string
+          enum:
+          - A
+          - D
+          - E
+          - F
+          - U
+          description: A=Approved, D=Declined, E=Error, F=Force, U=Undetermined
+        response_code:
+          type: string
+        response_desc:
+          type: string
+        authorization_code:
+          type: string
+        avs_result:
+          type: string
+        cvv_result:
+          type: string
+    EcheckInfo:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        masked_account_number:
+          type: string
+        routing_number:
+          type: string
     Address:
       type: object
       properties:
@@ -254,6 +298,100 @@ components:
         country_code:
           type: string
           default: US
+    TransactionList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        page_index:
+          type: integer
+        page_size:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+    EcheckRequest:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        account_number:
+          type: string
+        routing_number:
+          type: string
+        sec_code:
+          type: string
+          enum:
+          - PPD
+          - CCD
+          - WEB
+          - TEL
+    Error:
+      type: object
+      properties:
+        response_type:
+          type: string
+        response_code:
+          type: string
+        response_desc:
+          type: string
+    TransactionUpdateRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - capture
+          - void
+          - credit
+        authorization_amount:
+          type: number
+          format: double
+    TransactionRequest:
+      type: object
+      required:
+      - action
+      - authorization_amount
+      properties:
+        action:
+          type: string
+          enum:
+          - sale
+          - authorize
+          - capture
+          - void
+          - credit
+          - force
+          - verify
+        authorization_amount:
+          type: number
+          format: double
+          minimum: 0.01
+        entered_by:
+          type: string
+        order_number:
+          type: string
+        customer_token:
+          type: string
+        paymethod_token:
+          type: string
+        card:
+          $ref: '#/components/schemas/CardRequest'
+        echeck:
+          $ref: '#/components/schemas/EcheckRequest'
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        xdata:
+          type: object
+          description: Custom key-value pairs for extended transaction data
+          additionalProperties:
+            type: string
     Transaction:
       type: object
       properties:
@@ -299,63 +437,6 @@ components:
           type: string
         schedule_id:
           type: string
-    CardRequest:
-      type: object
-      properties:
-        card_type:
-          type: string
-        name_on_card:
-          type: string
-        account_number:
-          type: string
-          description: Full card number (PCI sensitive)
-        expire_month:
-          type: string
-          pattern: ^(0[1-9]|1[0-2])$
-        expire_year:
-          type: string
-          pattern: ^[0-9]{4}$
-        cvv:
-          type: string
-    TransactionRequest:
-      type: object
-      required:
-      - action
-      - authorization_amount
-      properties:
-        action:
-          type: string
-          enum:
-          - sale
-          - authorize
-          - capture
-          - void
-          - credit
-          - force
-          - verify
-        authorization_amount:
-          type: number
-          format: double
-          minimum: 0.01
-        entered_by:
-          type: string
-        order_number:
-          type: string
-        customer_token:
-          type: string
-        paymethod_token:
-          type: string
-        card:
-          $ref: '#/components/schemas/CardRequest'
-        echeck:
-          $ref: '#/components/schemas/EcheckRequest'
-        billing_address:
-          $ref: '#/components/schemas/Address'
-        xdata:
-          type: object
-          description: Custom key-value pairs for extended transaction data
-          additionalProperties:
-            type: string
     CardInfo:
       type: object
       properties:
@@ -378,87 +459,6 @@ components:
           type: string
         expire_year:
           type: string
-    Error:
-      type: object
-      properties:
-        response_type:
-          type: string
-        response_code:
-          type: string
-        response_desc:
-          type: string
-    TransactionResponse:
-      type: object
-      properties:
-        environment:
-          type: string
-          enum:
-          - live
-          - sandbox
-        response_type:
-          type: string
-          enum:
-          - A
-          - D
-          - E
-          - F
-          - U
-          description: A=Approved, D=Declined, E=Error, F=Force, U=Undetermined
-        response_code:
-          type: string
-        response_desc:
-          type: string
-        authorization_code:
-          type: string
-        avs_result:
-          type: string
-        cvv_result:
-          type: string
-    EcheckInfo:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        masked_account_number:
-          type: string
-        routing_number:
-          type: string
-    TransactionUpdateRequest:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          enum:
-          - capture
-          - void
-          - credit
-        authorization_amount:
-          type: number
-          format: double
-    EcheckRequest:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        account_number:
-          type: string
-        routing_number:
-          type: string
-        sec_code:
-          type: string
-          enum:
-          - PPD
-          - CCD
-          - WEB
-          - TEL
   securitySchemes:
     basicAuth:
       type: http
