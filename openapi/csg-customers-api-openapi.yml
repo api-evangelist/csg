@@ -191,20 +191,6 @@ paths:
           description: Customer deleted
 components:
   schemas:
-    CustomerSummary:
-      type: object
-      properties:
-        customer_token:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        company_name:
-          type: string
-        created_date:
-          type: string
-          format: date
     Address:
       type: object
       properties:
@@ -227,6 +213,20 @@ components:
         country_code:
           type: string
           default: US
+    CustomerSummary:
+      type: object
+      properties:
+        customer_token:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        created_date:
+          type: string
+          format: date
     CustomerRequest:
       type: object
       properties:
@@ -243,21 +243,6 @@ components:
           type: string
         billing_address:
           $ref: '#/components/schemas/Address'
-    Customer:
-      allOf:
-      - $ref: '#/components/schemas/CustomerSummary'
-      - type: object
-        properties:
-          email:
-            type: string
-            format: email
-          phone:
-            type: string
-          billing_address:
-            $ref: '#/components/schemas/Address'
-          updated_date:
-            type: string
-            format: date
     CustomerList:
       type: object
       properties:
@@ -276,6 +261,21 @@ components:
           type: string
         response_desc:
           type: string
+    Customer:
+      allOf:
+      - $ref: '#/components/schemas/CustomerSummary'
+      - type: object
+        properties:
+          email:
+            type: string
+            format: email
+          phone:
+            type: string
+          billing_address:
+            $ref: '#/components/schemas/Address'
+          updated_date:
+            type: string
+            format: date
   responses:
     NotFound:
       description: Resource not found

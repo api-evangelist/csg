@@ -81,6 +81,34 @@ paths:
                 $ref: '#/components/schemas/PaymentMethod'
 components:
   schemas:
+    EcheckRequest:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        account_number:
+          type: string
+        routing_number:
+          type: string
+        sec_code:
+          type: string
+          enum:
+          - PPD
+          - CCD
+          - WEB
+          - TEL
+    PaymentMethodList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
     PaymentMethodRequest:
       type: object
       required:
@@ -127,25 +155,6 @@ components:
           type: string
         routing_number:
           type: string
-    EcheckRequest:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        account_number:
-          type: string
-        routing_number:
-          type: string
-        sec_code:
-          type: string
-          enum:
-          - PPD
-          - CCD
-          - WEB
-          - TEL
     PaymentMethod:
       type: object
       properties:
@@ -165,15 +174,6 @@ components:
         created_date:
           type: string
           format: date
-    PaymentMethodList:
-      type: object
-      properties:
-        number_results:
-          type: integer
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethod'
     CardInfo:
       type: object
       properties:
