@@ -227,6 +227,15 @@ components:
         created_date:
           type: string
           format: date
+    Error:
+      type: object
+      properties:
+        response_type:
+          type: string
+        response_code:
+          type: string
+        response_desc:
+          type: string
     CustomerRequest:
       type: object
       properties:
@@ -252,15 +261,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomerSummary'
-    Error:
-      type: object
-      properties:
-        response_type:
-          type: string
-        response_code:
-          type: string
-        response_desc:
-          type: string
     Customer:
       allOf:
       - $ref: '#/components/schemas/CustomerSummary'

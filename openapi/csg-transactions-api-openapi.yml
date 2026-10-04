@@ -194,39 +194,6 @@ paths:
                 $ref: '#/components/schemas/Transaction'
 components:
   schemas:
-    TransactionUpdateRequest:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          enum:
-          - capture
-          - void
-          - credit
-        authorization_amount:
-          type: number
-          format: double
-    EcheckRequest:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        account_number:
-          type: string
-        routing_number:
-          type: string
-        sec_code:
-          type: string
-          enum:
-          - PPD
-          - CCD
-          - WEB
-          - TEL
     Address:
       type: object
       properties:
@@ -249,6 +216,40 @@ components:
         country_code:
           type: string
           default: US
+    Error:
+      type: object
+      properties:
+        response_type:
+          type: string
+        response_code:
+          type: string
+        response_desc:
+          type: string
+    TransactionList:
+      type: object
+      properties:
+        number_results:
+          type: integer
+        page_index:
+          type: integer
+        page_size:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+    EcheckInfo:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        masked_account_number:
+          type: string
+        routing_number:
+          type: string
     CardRequest:
       type: object
       properties:
@@ -267,70 +268,6 @@ components:
           pattern: ^[0-9]{4}$
         cvv:
           type: string
-    EcheckInfo:
-      type: object
-      properties:
-        account_type:
-          type: string
-          enum:
-          - checking
-          - savings
-        masked_account_number:
-          type: string
-        routing_number:
-          type: string
-    TransactionRequest:
-      type: object
-      required:
-      - action
-      - authorization_amount
-      properties:
-        action:
-          type: string
-          enum:
-          - sale
-          - authorize
-          - capture
-          - void
-          - credit
-          - force
-          - verify
-        authorization_amount:
-          type: number
-          format: double
-          minimum: 0.01
-        entered_by:
-          type: string
-        order_number:
-          type: string
-        customer_token:
-          type: string
-        paymethod_token:
-          type: string
-        card:
-          $ref: '#/components/schemas/CardRequest'
-        echeck:
-          $ref: '#/components/schemas/EcheckRequest'
-        billing_address:
-          $ref: '#/components/schemas/Address'
-        xdata:
-          type: object
-          description: Custom key-value pairs for extended transaction data
-          additionalProperties:
-            type: string
-    TransactionList:
-      type: object
-      properties:
-        number_results:
-          type: integer
-        page_index:
-          type: integer
-        page_size:
-          type: integer
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
     Transaction:
       type: object
       properties:
@@ -375,15 +312,6 @@ components:
         paymethod_token:
           type: string
         schedule_id:
-          type: string
-    Error:
-      type: object
-      properties:
-        response_type:
-          type: string
-        response_code:
-          type: string
-        response_desc:
           type: string
     TransactionResponse:
       type: object
@@ -434,15 +362,87 @@ components:
           type: string
         expire_year:
           type: string
+    TransactionRequest:
+      type: object
+      required:
+      - action
+      - authorization_amount
+      properties:
+        action:
+          type: string
+          enum:
+          - sale
+          - authorize
+          - capture
+          - void
+          - credit
+          - force
+          - verify
+        authorization_amount:
+          type: number
+          format: double
+          minimum: 0.01
+        entered_by:
+          type: string
+        order_number:
+          type: string
+        customer_token:
+          type: string
+        paymethod_token:
+          type: string
+        card:
+          $ref: '#/components/schemas/CardRequest'
+        echeck:
+          $ref: '#/components/schemas/EcheckRequest'
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        xdata:
+          type: object
+          description: Custom key-value pairs for extended transaction data
+          additionalProperties:
+            type: string
+    TransactionUpdateRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - capture
+          - void
+          - credit
+        authorization_amount:
+          type: number
+          format: double
+    EcheckRequest:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        account_number:
+          type: string
+        routing_number:
+          type: string
+        sec_code:
+          type: string
+          enum:
+          - PPD
+          - CCD
+          - WEB
+          - TEL
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Insufficient permissions
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -453,8 +453,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
