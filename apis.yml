@@ -257,6 +257,12 @@ useCases:
   - name: Marketplace Payouts
     description: Platforms reconcile and settle funds across many merchant locations.
 common:
+  - type: Plans
+    url: plans/csg-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/csg-rate-limits.yml
+  - type: FinOps
+    url: finops/csg-finops.yml
   - type: CapabilityMap
     url: capabilities/csg-capability-edges.yml
     name: CSG Systems Business Capability Map
