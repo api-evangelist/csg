@@ -153,10 +153,8 @@ apis:
 unitEconomics:
   - name: Cost per Transaction
     metric: billed_cost / (forte_card_transactions + forte_ach_transactions)
-    target: TBD
   - name: Cost per Subscriber
     metric: billed_cost / singleview_subscribers
-    target: TBD
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
