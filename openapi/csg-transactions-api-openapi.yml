@@ -194,37 +194,6 @@ paths:
                 $ref: '#/components/schemas/Transaction'
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        company_name:
-          type: string
-        physical_address:
-          type: string
-        locality:
-          type: string
-          description: City
-        region:
-          type: string
-          description: State/province
-        postal_code:
-          type: string
-        country_code:
-          type: string
-          default: US
-    Error:
-      type: object
-      properties:
-        response_type:
-          type: string
-        response_code:
-          type: string
-        response_desc:
-          type: string
     TransactionList:
       type: object
       properties:
@@ -238,36 +207,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Transaction'
-    EcheckInfo:
+    TransactionUpdateRequest:
       type: object
+      required:
+      - action
       properties:
-        account_type:
+        action:
           type: string
           enum:
-          - checking
-          - savings
-        masked_account_number:
-          type: string
-        routing_number:
-          type: string
-    CardRequest:
-      type: object
-      properties:
-        card_type:
-          type: string
-        name_on_card:
-          type: string
-        account_number:
-          type: string
-          description: Full card number (PCI sensitive)
-        expire_month:
-          type: string
-          pattern: ^(0[1-9]|1[0-2])$
-        expire_year:
-          type: string
-          pattern: ^[0-9]{4}$
-        cvv:
-          type: string
+          - capture
+          - void
+          - credit
+        authorization_amount:
+          type: number
+          format: double
     Transaction:
       type: object
       properties:
@@ -313,55 +266,37 @@ components:
           type: string
         schedule_id:
           type: string
-    TransactionResponse:
+    Error:
       type: object
       properties:
-        environment:
-          type: string
-          enum:
-          - live
-          - sandbox
         response_type:
           type: string
-          enum:
-          - A
-          - D
-          - E
-          - F
-          - U
-          description: A=Approved, D=Declined, E=Error, F=Force, U=Undetermined
         response_code:
           type: string
         response_desc:
           type: string
-        authorization_code:
-          type: string
-        avs_result:
-          type: string
-        cvv_result:
-          type: string
-    CardInfo:
+    Address:
       type: object
       properties:
-        card_type:
+        first_name:
           type: string
-          enum:
-          - visa
-          - mstr
-          - disc
-          - amex
-          - jcb
-          - dine
-          - enrt
-        name_on_card:
+        last_name:
           type: string
-        masked_account_number:
+        company_name:
           type: string
-          description: Masked card number (e.g., XXXX-XXXX-XXXX-1234)
-        expire_month:
+        physical_address:
           type: string
-        expire_year:
+        locality:
           type: string
+          description: City
+        region:
+          type: string
+          description: State/province
+        postal_code:
+          type: string
+        country_code:
+          type: string
+          default: US
     TransactionRequest:
       type: object
       required:
@@ -401,20 +336,85 @@ components:
           description: Custom key-value pairs for extended transaction data
           additionalProperties:
             type: string
-    TransactionUpdateRequest:
+    CardInfo:
       type: object
-      required:
-      - action
       properties:
-        action:
+        card_type:
           type: string
           enum:
-          - capture
-          - void
-          - credit
-        authorization_amount:
-          type: number
-          format: double
+          - visa
+          - mstr
+          - disc
+          - amex
+          - jcb
+          - dine
+          - enrt
+        name_on_card:
+          type: string
+        masked_account_number:
+          type: string
+          description: Masked card number (e.g., XXXX-XXXX-XXXX-1234)
+        expire_month:
+          type: string
+        expire_year:
+          type: string
+    EcheckInfo:
+      type: object
+      properties:
+        account_type:
+          type: string
+          enum:
+          - checking
+          - savings
+        masked_account_number:
+          type: string
+        routing_number:
+          type: string
+    TransactionResponse:
+      type: object
+      properties:
+        environment:
+          type: string
+          enum:
+          - live
+          - sandbox
+        response_type:
+          type: string
+          enum:
+          - A
+          - D
+          - E
+          - F
+          - U
+          description: A=Approved, D=Declined, E=Error, F=Force, U=Undetermined
+        response_code:
+          type: string
+        response_desc:
+          type: string
+        authorization_code:
+          type: string
+        avs_result:
+          type: string
+        cvv_result:
+          type: string
+    CardRequest:
+      type: object
+      properties:
+        card_type:
+          type: string
+        name_on_card:
+          type: string
+        account_number:
+          type: string
+          description: Full card number (PCI sensitive)
+        expire_month:
+          type: string
+          pattern: ^(0[1-9]|1[0-2])$
+        expire_year:
+          type: string
+          pattern: ^[0-9]{4}$
+        cvv:
+          type: string
     EcheckRequest:
       type: object
       properties:
@@ -447,14 +447,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Insufficient permissions
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
