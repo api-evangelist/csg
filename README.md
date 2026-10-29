@@ -1,4 +1,4 @@
-# CSG Systems (csg)
+# CSG Systems
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,141 +66,157 @@
 
 CSG is a global provider of customer engagement, revenue management, and payments solutions enabling communications, media, and entertainment companies to monetize and digitally enable customer experiences. CSG's developer surface includes the CSG Forte payments REST API, Forte.js client-side tokenization library, the Forte React Native SDK, and the Singleview convergent billing platform.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/csg/refs/heads/main/apis.yml)
+**Areas:** Billing · Customer Engagement · Payments · Revenue Management · Telecommunications
 
-## Scope
+## CSG Systems on APIs.io
 
-- **Type:** Index
-- **Access:** 3rd-Party
+Everything profiled for CSG Systems is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/csg/](https://apis.io/providers/csg/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Billing
-- Customer Engagement
-- Payments
-- Revenue Management
-- Telecom
+- [CSG Forte.js](https://apis.io/apis/csg/csg-forte-js/) — Forte.js is a JavaScript library for secure browser-based payment tokenization. It enables web applications to collect and tokenize payment card data…
+- [CSG Forte React Native SDK](https://apis.io/apis/csg/csg-forte-react-native-sdk/) — The Forte React Native SDK enables mobile application developers to integrate payment processing capabilities into iOS and Android apps built with React Native.
+- [CSG Singleview Billing API](https://apis.io/apis/csg/csg-singleview-api/) — CSG Singleview is a comprehensive convergent billing and revenue management platform designed for communication service providers. APIs enable subscriber…
+- [CSG Systems Customers API](https://apis.io/apis/csg/csg-customers-api/) — Customer record management
+- [CSG Systems Payment Methods API](https://apis.io/apis/csg/csg-payment-methods-api/) — Payment method tokenization and management
+- [CSG Systems Settlements API](https://apis.io/apis/csg/csg-settlements-api/) — Settlement query and reconciliation
+- [CSG Systems Transactions API](https://apis.io/apis/csg/csg-transactions-api/) — Payment transaction processing (credit card, echeck, scheduled)
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-18
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### CSG Forte REST API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-CSG Forte provides full-stack REST APIs for payment processing within a PCI-compliant architecture. The API enables merchants and partners to create and update credit card, echeck, and scheduled transactions, securely manage customer and payment data, and query settlement information. Authentication uses HTTP Basic with organization ID, location ID, and API key.
+- [Csg Agentic Access](https://apis.io/agentic-access/csg/csg-agentic-access/)
 
-- **Human URL:** [https://developers.forte.net/](https://developers.forte.net/)
-- **Base URL:** `https://api.forte.net/v3`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- ACH
-- Billing
-- Credit Card
-- Payments
-- PCI
-- REST
+- [CSG Forte Payment Transaction](https://apis.io/schemas/csg/csg-forte-transaction/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://developers.forte.net/introduction-rest-api/)
-- [Reference](https://restdocs.forte.net/)
-- [Getting Started](https://developers.forte.net/getting-started/)
-- [Sandbox](https://www.forte.net/test-account-setup/)
-- [Changelog](https://releases.forte.net/)
-- [Status Page](https://status.forte.net/)
-- [Support](https://support.forte.net/)
-- [Training](https://training.forte.net/)
-- [OpenAPI](openapi/csg-forte-rest-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/csg-forte-transaction-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](json-ld/csg-context.jsonld)
+Linked-data contexts for the provider's vocabulary.
 
-### CSG Forte.js
+- [Csg Context](https://apis.io/jsonld/csg/csg-context/)
 
-Forte.js is a JavaScript library for secure browser-based payment tokenization. It enables web applications to collect and tokenize payment card data client-side before submitting to Forte's payment API, reducing PCI scope.
+#### Vocabulary (1)
 
-- **Human URL:** [https://developers.forte.net/forte-js/](https://developers.forte.net/forte-js/)
-- **Base URL:** `https://api.forte.net`
+The provider's domain terms, defined.
 
-#### Tags
+- [CSG Forte Vocabulary](https://apis.io/vocabularies/csg/csg-forte-vocabulary/)
 
-- JavaScript
-- Payments
-- SDK
-- Web
+#### Collections (5)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://developers.forte.net/forte-js/)
-- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [CSG Forte REST Customers API](https://apis.io/collections/csg/open-csg-customers-api/)
+- [CSG Forte REST API](https://apis.io/collections/csg/open-csg-forte-rest/)
+- [CSG Forte REST Customers Payment Methods API](https://apis.io/collections/csg/open-csg-payment-methods-api/)
+- [CSG Forte REST Customers Settlements API](https://apis.io/collections/csg/open-csg-settlements-api/)
+- [CSG Forte REST Customers Transactions API](https://apis.io/collections/csg/open-csg-transactions-api/)
 
-### CSG Forte React Native SDK
+#### Governance rules (2)
 
-The Forte React Native SDK enables mobile application developers to integrate payment processing capabilities into iOS and Android apps built with React Native.
+Spectral rulesets for the provider's contracts.
 
-- **Human URL:** [https://developers.forte.net/forte-react-native/](https://developers.forte.net/forte-react-native/)
-- **Base URL:** `https://api.forte.net`
+- [CSG Systems — forte rules](https://apis.io/rules/csg/csg-forte-rules/)
+- [CSG Systems — jsonschema rules](https://apis.io/rules/csg/csg-jsonschema-spectral-rules/)
 
-#### Tags
+#### Security (3)
 
-- Mobile
-- Payments
-- React Native
-- SDK
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Csg Authentication](https://apis.io/security/csg/csg-authentication/)
+- [Csg Domain Security](https://apis.io/security/csg/csg-domain-security/)
+- [Csg Vulnerability Disclosure](https://apis.io/security/csg/csg-vulnerability-disclosure/)
 
-- [Documentation](https://developers.forte.net/forte-react-native/)
-- [S D Ks](https://developers.forte.net/forte-react-native/)
-- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### CSG Singleview Billing API
+Published plans, tiers and prices.
 
-CSG Singleview is a comprehensive convergent billing and revenue management platform designed for communication service providers. APIs enable subscriber billing, usage rating, invoice generation, and payment processing across converged 5G and IoT services.
+- [Csg Plans Pricing](https://apis.io/plans/csg/csg-plans-pricing/)
 
-- **Human URL:** [https://www.csgi.com/](https://www.csgi.com/)
-- **Base URL:** `https://api.csgi.com`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Billing
-- BSS
-- Revenue Management
-- SOAP
-- Telecom
+- [Csg Rate Limits](https://apis.io/rate-limits/csg/csg-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://www.csgi.com/)
-- [Postman Collection](collections/csg-forte-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/csg-forte-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-## Common Properties
+- [Csg Finops](https://apis.io/finops/csg/csg-finops/)
 
-- [GitHub Organization](https://github.com/csg-i)
-- [LinkedIn](https://www.linkedin.com/company/csg-)
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.csgi.com/)
-- [OpenAPI](openapi/csg-forte-rest-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](json-schema/csg-forte-transaction-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](json-ld/csg-context.jsonld)
-- [Spectral Rules](rules/csg-forte-rules.yml)
-- [Vocabulary](vocabulary/csg-forte-vocabulary.yml)
-- [Portal](https://www.forte.net/developers/)
 - [Documentation](https://developers.forte.net/)
-- [Reference](https://restdocs.forte.net/)
+- [Getting started](https://www.forte.net/test-account-setup/)
 - [Support](https://support.forte.net/)
-- [Status Page](https://status.forte.net/)
 - [Changelog](https://releases.forte.net/)
-- [Getting Started](https://www.forte.net/test-account-setup/)
+- [Blog](https://developers.forte.net/feed/)
+- [GitHub](https://github.com/csg-i)
+- [Status](https://status.forte.net/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 46.0** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 62.1 |
+| Contract governance | 27.3 |
+| Operational transparency | 50.0 |
+| Developer ergonomics | 71.4 |
+| Access clarity | 5.3 |
+
+**Agent readiness 22.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.2** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/csg/](https://apis.io/providers/csg/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for CSG Systems: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/csg/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
